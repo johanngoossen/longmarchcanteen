@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Long March Canteen – Chinesisches Restaurant in Berlin Kreuzberg</title>
+<meta name="description" content="Long March Canteen – Dim Sum & chinesisch-kantonesische Küche in Berlin Kreuzberg. Michelin Bib Gourmand 2022 & 2025. Reservierung online oder telefonisch.">
+
+<!-- URW DIN über Adobe Typekit (bestehende LMC Lizenz) -->
+<link rel="stylesheet" href="https://use.typekit.net/kuz5egd.css">
+<!-- Fallback: DIN 2014 von Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --offwhite: #f5f5f5;
+    --accent: #ff8845; /* Orange — Akzentfarbe LMC (heller für Kontrast) */
+    --radius-lg: 1.94rem;
+    --radius-sm: 1.11rem;
+    --pad-x: 10vw;
+    --pad-y: 6.67rem;
+    --frame-gap: 1.2rem; /* Abstand zwischen Frames */
+    --font-base: "urw-din", "Barlow", "Inter", system-ui, sans-serif;
+    --font-cond: "urw-din-condensed", "Barlow Condensed", "Inter", system-ui, sans-serif;
+    --font-semi: "urw-din-semi-condensed", "Barlow Condensed", "Inter", system-ui, sans-serif;
+  }
+
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  @media (max-width: 543px) { html { font-size: 16px; } }
+  body {
+    font-family: var(--font-base);
+    font-weight: 500;
+    color: var(--white);
+    background: var(--black);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  /* ---------- Layout helpers ---------- */
+  .wrap { padding-left: var(--pad-x); padding-right: var(--pad-x); }
+  .section {
+    padding: var(--pad-y) var(--pad-x);
+    border-radius: var(--radius-lg);
+    margin: var(--frame-gap);
+  }
+  .section.dark { background: var(--black); color: var(--white); }
+  .section.light { background: var(--white); color: var(--black); }
+
+  /* ---------- Type styles ---------- */
+  .nav-label {
+    font-family: var(--font-semi);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+  }
+  .h-section {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 1.44rem;
+    line-height: 1.67rem;
+    letter-spacing: 0.056rem;
+    text-transform: uppercase;
+  }
+  @media (max-width: 767px) {
+    .h-section { font-size: 1rem; line-height: 1.11rem; letter-spacing: 0; }
+  }
+  .h-hero {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: 1.67rem;
+    line-height: 1.78rem;
+  }
+  @media (max-width: 767px) {
+    .h-hero { font-size: 1.11rem; line-height: 1.11rem; }
+  }
+  .body-menu {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.022rem;
+  }
+  .menu-cat {
+    font-family: var(--font-cond);
+    font-weight: 500;
+    font-size: 1.33rem;
+    line-height: 1.44rem;
+    text-transform: uppercase;
+  }
+  @media (max-width: 767px) {
+    .menu-cat { font-size: 0.89rem; line-height: 1.11rem; }
+  }
+
+  /* ---------- Navigation ---------- */
+  header.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 120;
+    height: 3.89rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--pad-x);
+    /* Hintergrund + Farbe werden via Custom Properties + JS scroll-progress weich überblendet.
+       --nav-progress läuft von 0..1, --nav-alpha von 0..0.6 (max. Sichtbarkeit) */
+    --nav-progress: 0;
+    --nav-alpha: 0;
+    background: rgba(245, 245, 245, var(--nav-alpha));
+    -webkit-backdrop-filter: blur(calc(var(--nav-progress) * 12px));
+    backdrop-filter: blur(calc(var(--nav-progress) * 12px));
+    color: var(--white);
+    text-shadow: 0 1px 6px rgba(0,0,0,calc(0.35 * (1 - var(--nav-progress))));
+    transition: color .25s ease;
+  }
+  /* Wenn Progress > 0.5, wechselt die Schriftfarbe weich zu schwarz */
+  header.nav.scrolled {
+    color: var(--black);
+    text-shadow: none;
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { transition: opacity .2s; }
+  .nav-links a:hover { opacity: 0.55; }
+  .nav-social {
+    display: flex; gap: 0.9rem; align-items: center;
+    margin-left: 0.6rem;
+    height: 1.2rem;
+  }
+  .nav-social a {
+    display: inline-flex; align-items: center;
+    transition: color .2s, opacity .2s;
+  }
+  .nav-social a:hover { color: var(--accent); opacity: 1; }
+  .nav-social svg { width: 18px; height: 18px; fill: currentColor; }
+  .lang-switch {
+    display: flex; gap: 0.5rem;
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    margin-left: 0.5rem;
+  }
+  .lang-switch a.active { font-weight: 600; }
+  .lang-switch a:not(.active) { opacity: 0.4; }
+  .lang-switch a:hover { opacity: 0.7; }
+  .lang-switch.mobile-lang { display: none; }
+
+  .nav-spacer { flex: 1; }
+
+  .nav-toggle { display: none; }
+  @media (max-width: 991px) {
+    .nav-links { display: none; }
+    .nav-toggle {
+      display: flex; flex-direction: column; gap: 5px;
+      width: 28px; height: 20px; justify-content: center;
+      margin-left: 1.2rem;
+      order: 3;
+    }
+    .nav-toggle span { display: block; height: 2px; background: currentColor; }
+    /* Wenn das mobile Menü offen ist, bekommt der Header DIESELBE Glas-Optik wie das Popup,
+       unabhängig vom Scroll-Status */
+    header.nav.nav-mobile-open {
+      --nav-progress: 1;
+      --nav-alpha: 0.6;
+      background: rgba(245, 245, 245, 0.6);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      color: var(--black);
+      text-shadow: none;
+    }
+    .nav-mobile-open .nav-links {
+      display: flex; flex-direction: column;
+      position: fixed; top: 3.89rem; left: 0; right: 0;
+      /* identisch zur Top-Bar — gleicher Hintergrund, gleicher Blur */
+      background: rgba(245, 245, 245, 0.6);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      color: var(--black);
+      padding: 2rem var(--pad-x);
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+    .nav-social { margin-left: 0; }
+    /* Sprachschalter im mobilen Header sichtbar und korrekt aligniert */
+    .lang-switch.mobile-lang {
+      display: flex !important;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 0;
+      order: 2;
+      color: inherit;
+    }
+  }
+  @media (min-width: 992px) {
+    .lang-switch.mobile-lang { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%),
+      url("Longmarchcanteen-040.jpg") center/cover no-repeat;
+    background-color: #0a1530;
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    margin: var(--frame-gap);
+    margin-top: 4.4rem;
+    padding: 6rem var(--pad-x) 5rem;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-logo {
+    max-width: 70%;
+    margin-bottom: 2rem;
+  }
+  /* Querformat-Variante (Standard / Desktop) */
+  .hero-logo-wide { height: 9rem; display: block; }
+  /* Hochformat-Variante (Logo 2) — nur sichtbar, wenn Viewport hochkant ist */
+  .hero-logo-portrait { height: 14rem; display: none; }
+  /* Wenn das Seitenverhältnis eher hochkant ist (mobil / portrait), zeigen wir Logo 2 */
+  @media (max-aspect-ratio: 4/5) {
+    .hero-logo-wide { display: none; }
+    .hero-logo-portrait { display: block; height: 16rem; max-width: 65%; }
+  }
+  @media (max-width: 767px) {
+    .hero-logo-wide { height: 6rem; max-width: 80%; }
+    .hero-logo-portrait { height: 13rem; max-width: 70%; }
+  }
+  .hero-tagline {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: 0.45rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 767px) {
+    .hero-tagline { font-size: 0.85rem; letter-spacing: 0.3rem; }
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-quote {
+    position: absolute;
+    bottom: 3rem; left: 50%;
+    transform: translateX(-50%);
+    max-width: 32rem;
+    width: 90%;
+    text-align: center;
+  }
+  .hero-quote p {
+    font-family: var(--font-cond);
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    font-style: italic;
+    opacity: 0.85;
+  }
+  .hero-quote cite {
+    display: block;
+    margin-top: 0.7rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    font-style: normal;
+    opacity: 0.65;
+  }
+  @media (max-width: 767px) {
+    .hero-quote { display: none; }
+    .hero { min-height: 78vh; padding-top: 5rem; padding-bottom: 4rem; }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    /* pill-shape mit definiertem Radius — wird nicht "kreisförmig" bei kleinem Button */
+    border-radius: 2.2rem;
+    font-family: var(--font-semi);
+    font-size: 0.9rem;
+    letter-spacing: 0.18rem;
+    text-transform: uppercase;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+    text-decoration: none !important;
+    line-height: 1.1;
+    text-align: center;
+  }
+  /* Alle Buttons werden beim Hover orange (heller Orange, Text bleibt schwarz) */
+  .btn-primary {
+    background: var(--white);
+    color: var(--black);
+  }
+  .btn-primary:hover { background: var(--accent); color: var(--black); }
+  .btn-outline {
+    border-color: var(--white);
+    color: var(--white);
+  }
+  .btn-outline:hover { background: var(--accent); color: var(--black); border-color: var(--accent); }
+  .btn-dark {
+    background: var(--black);
+    color: var(--white);
+  }
+  .btn-dark:hover { background: var(--accent); color: var(--black); }
+  .btn-outline-dark {
+    border-color: var(--black);
+    color: var(--black);
+  }
+  .btn-outline-dark:hover { background: var(--accent); color: var(--black); border-color: var(--accent); }
+  .btn-sm {
+    padding: 0.65rem 1.3rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14rem;
+    border-radius: 2rem;
+  }
+
+  /* ---------- Reservierung Section ---------- */
+  .reserve {
+    text-align: center;
+    padding-top: 6rem; padding-bottom: 6rem;
+  }
+  .reserve h2 { margin-bottom: 2rem; }
+  .reserve-lead {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 34rem;
+    margin: 0 auto 2.5rem;
+    opacity: 0.75;
+  }
+  @media (max-width: 767px) {
+    .reserve-lead { font-size: 1rem; }
+  }
+  .reserve .actions {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .reserve-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    text-align: left;
+  }
+  @media (max-width: 767px) {
+    .reserve-info { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+  .reserve-info .card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-sm);
+    padding: 2rem;
+  }
+  .section.light .reserve-info .card {
+    background: var(--offwhite);
+    border: none;
+  }
+  .reserve-info .card h3 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    margin-bottom: 1rem;
+  }
+  .reserve-info .card p,
+  .reserve-info .card a {
+    font-family: var(--font-cond);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .reserve-info .card a:not(.btn) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ---------- Menü Übersicht ---------- */
+  .menus h2 { text-align: center; margin-bottom: 3rem; }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  @media (max-width: 991px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 543px) { .menu-grid { grid-template-columns: 1fr; } }
+  .menu-card {
+    background: var(--white);
+    color: var(--black);
+    border-radius: var(--radius-sm);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform .25s, background .25s, color .25s;
+  }
+  .menu-card:hover { transform: translateY(-4px); background: var(--accent); color: var(--black); }
+  .menu-card:hover .tag { opacity: 0.7; color: var(--black); }
+  .menu-card .tag {
+    font-family: var(--font-semi);
+    font-size: 0.7rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+  .menu-card h3 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    line-height: 1.1;
+  }
+  .menu-card .desc {
+    font-family: var(--font-cond);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .menu-card .arrow {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+
+  /* ---------- Awards ---------- */
+  .awards { text-align: center; }
+  .awards h2 { margin-bottom: 2rem; }
+  .award-row {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 1.8rem; margin-top: 3rem;
+    align-items: center;
+  }
+  .award {
+    /* Foto-Platzhalter – später durch echte Award-Logos ersetzen */
+    width: 9rem; height: 9rem;
+    background: var(--offwhite);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    padding: 0.8rem;
+    line-height: 1.15;
+  }
+  .award span { display: block; width: 100%; }
+
+  /* ---------- Press Quotes ---------- */
+  .press h2 { text-align: center; margin-bottom: 3rem; }
+  .quote-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  @media (max-width: 991px) { .quote-grid { grid-template-columns: 1fr; } }
+  .quote {
+    border: 1px solid currentColor;
+    border-radius: var(--radius-sm);
+    padding: 2rem;
+  }
+  .quote p {
+    font-family: var(--font-cond);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .quote .source {
+    font-family: var(--font-semi);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+  }
+  .quote .source a { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- Info (Adresse, Zeiten, Kontakt) ---------- */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+  @media (max-width: 767px) { .info-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .info-block h3 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid currentColor;
+  }
+  .info-block p, .info-block a {
+    font-family: var(--font-cond);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .info-block a { text-decoration: underline; text-underline-offset: 3px; }
+  .info-block a:hover { color: var(--accent); }
+  .opening dl { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1.5rem; }
+  .opening dt {
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+  }
+  .opening dd { font-family: var(--font-cond); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 4rem var(--pad-x) 2.5rem;
+    background: var(--black);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    margin: var(--frame-gap);
+  }
+  footer .footer-logo { filter: brightness(0) invert(1); }
+  footer a:hover { color: var(--accent); }
+  .footer-bottom {
+    border-top-color: rgba(255,255,255,0.15) !important;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 767px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+  @media (max-width: 543px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  .footer-logo { height: 2.2rem; margin-bottom: 1rem; }
+  .footer-col h4 {
+    font-family: var(--font-semi);
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.5rem; }
+  .footer-col a {
+    font-family: var(--font-cond);
+    font-size: 0.95rem;
+  }
+  .footer-col a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid #eaeaea;
+    font-family: var(--font-semi);
+    font-size: 0.75rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* ---------- Utility ---------- */
+  .center { text-align: center; }
+  .mt-1 { margin-top: 1rem; }
+  .mt-2 { margin-top: 2rem; }
+  .mt-3 { margin-top: 3rem; }
+
+  /* Skip link */
+  .skip {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--black); color: var(--white);
+    padding: 0.8rem 1.2rem; z-index: 999;
+  }
+  .skip:focus { left: 1rem; top: 1rem; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Zum Inhalt springen</a>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav" id="nav">
+  <div class="nav-spacer"></div>
+  <nav class="nav-links nav-label" aria-label="Hauptnavigation">
+    <a href="#reservieren">Reservieren</a>
+    <a href="#menus">Menüs</a>
+    <a href="#kontakt">Kontakt</a>
+    <span class="nav-social" aria-label="Social Media">
+      <a href="https://www.instagram.com/long_march_canteen" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2M12 0C8.7 0 8.3 0 7.1.1 5.8.1 5 .3 4.2.6c-.8.3-1.5.7-2.2 1.4C1.3 2.7.9 3.4.6 4.2.3 5 .1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.1.6 2.9.3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.6.5 2.9.6C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c1.3-.1 2.1-.3 2.9-.6.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.6.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.1-.6-2.9-.3-.8-.7-1.5-1.4-2.2-.7-.7-1.4-1.1-2.2-1.4-.8-.3-1.6-.5-2.9-.6C15.7 0 15.3 0 12 0z"/><path d="M12 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2 6.2-2.8 6.2-6.2-2.8-6.2-6.2-6.2zM12 16c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><circle cx="18.4" cy="5.6" r="1.4"/></svg>
+      </a>
+      <a href="https://www.facebook.com/LongMarchCanteenBerlin" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.7 0H1.3C.6 0 0 .6 0 1.3v21.3C0 23.4.6 24 1.3 24h11.5v-9.3H9.7v-3.6h3.1V8.4c0-3.1 1.9-4.8 4.7-4.8 1.3 0 2.5.1 2.8.1V7h-1.9c-1.5 0-1.8.7-1.8 1.8v2.3h3.6l-.5 3.6h-3.1V24h6.1c.7 0 1.3-.6 1.3-1.3V1.3C24 .6 23.4 0 22.7 0z"/></svg>
+      </a>
+    </span>
+    <span class="lang-switch">
+      <a href="#" class="active" aria-current="page">DE</a>
+      <a href="#" aria-label="English version">EN</a>
+    </span>
+  </nav>
+  <span class="lang-switch mobile-lang">
+    <a href="#" class="active" aria-current="page">DE</a>
+    <a href="#" aria-label="English version">EN</a>
+  </span>
+  <button class="nav-toggle" aria-label="Menü öffnen" id="navToggle">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" aria-label="Willkommen">
+  <img src="LMC-Logo-White.svg" alt="Long March Canteen Logo" class="hero-logo hero-logo-wide">
+  <img src="LMC-Logo-2-White.svg" alt="Long March Canteen Logo" class="hero-logo hero-logo-portrait">
+  <p class="hero-tagline">Dim Sum &middot; Berlin &middot; Kreuzberg</p>
+  <div class="hero-cta">
+    <a href="#reservieren" class="btn btn-primary">Tisch reservieren</a>
+    <a href="#menus" class="btn btn-outline">Speisekarte</a>
+  </div>
+  <div class="hero-quote">
+    <p>„Trank und Speise und der Liebesgenuß, darin bestehen die wichtigsten Triebe der Menschen."</p>
+    <cite>— Aus dem Buch der Riten</cite>
+  </div>
+</section>
+
+<!-- ============ RESERVIEREN ============ -->
+<section class="section light reserve" id="reservieren" aria-label="Reservierung">
+  <h2 class="h-section">Tisch reservieren</h2>
+  <p class="reserve-lead">
+    Wir freuen uns auf Ihren Besuch. Reservierungen sind online jederzeit möglich
+    oder telefonisch täglich ab 12:00 Uhr.
+  </p>
+  <div class="actions">
+    <a href="https://mytools.aleno.me/reservations/v2.0/reservations.html?k=eyJrIjoid2l2dTVrM2lsNm15cnBiOWlwdzZ4bmViajhycnVkaWRpZ280bGZwODBsbzlhNGlweTEiLCJyIjoiUEJKWHdxeTNBUWV6S1RNZFkiLCJzIjoiaHR0cHM6Ly9teXRvb2xzLmFsZW5vLm1lLyJ9"
+       target="_blank" rel="noopener" class="btn btn-dark">Online reservieren</a>
+    <a href="tel:+491788849599" class="btn btn-outline-dark">Telefon: +49 178 88 49 599</a>
+  </div>
+
+  <div class="reserve-info">
+    <div class="card">
+      <h3>Anfahrt</h3>
+      <p>
+        Wrangelstraße 20<br>
+        10997 Berlin – Kreuzberg
+      </p>
+      <a href="https://goo.gl/maps/AJ4xyw9CCgR8eVSo9" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm mt-2">Google Maps</a>
+    </div>
+    <div class="card">
+      <h3>Telefonisch</h3>
+      <p>
+        Reservierung: <a href="tel:+491788849599">+49 178 88 49 599</a><br>
+        (täglich ab 12:00)<br><br>
+        Restaurant: <a href="tel:+493031176789">030 / 311 767 89</a>
+      </p>
+    </div>
+    <div class="card">
+      <h3>Ab 7 Personen</h3>
+      <p>Für Gruppen am gleichen Tag bitte telefonisch, für andere Tage per <a href="mailto:info@longmarchcanteen.com">E-Mail</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENÜS ============ -->
+<section class="section dark menus" id="menus" aria-label="Speisekarte">
+  <h2 class="h-section">Unsere Menüs</h2>
+
+  <div class="menu-grid">
+
+    <a class="menu-card" href="menus.html#fruehling">
+      <span class="tag">Saison</span>
+      <h3>Frühlingsmenü</h3>
+      <p class="desc">Wechselt mit den Jahreszeiten – frische Zutaten, neue Kompositionen.</p>
+      <span class="arrow">Mehr →</span>
+    </a>
+
+    <a class="menu-card" href="menus.html#dim-sum-zwei">
+      <span class="tag">2 Personen</span>
+      <h3>Dim Sum für Zwei</h3>
+      <p class="desc">Eine kuratierte Reise durch unsere Klassiker – ideal für den ersten Besuch zu zweit.</p>
+      <span class="arrow">Mehr →</span>
+    </a>
+
+    <a class="menu-card" href="menus.html#de-luxe">
+      <span class="tag">ab 3 Personen</span>
+      <h3>De Luxe Menü</h3>
+      <p class="desc">Unser umfangreiches Sharing-Menü mit Sashimi, Carpaccios, Pak Choi, Peking-Entenbrust.</p>
+      <span class="arrow">Mehr →</span>
+    </a>
+
+    <a class="menu-card" href="menus.html#meister-afon">
+      <span class="tag">ab 3 Personen</span>
+      <h3>Meister Afons Menü</h3>
+      <p class="desc">Inspiriert von Meister Afon aus Zhejiang — mit Karpfen, Krosse Wachtel, Baby-Calamari.</p>
+      <span class="arrow">Mehr →</span>
+    </a>
+
+    <a class="menu-card" href="menus.html#vegan">
+      <span class="tag">Vegan</span>
+      <h3>Veganes Menü</h3>
+      <p class="desc">Vollständig pflanzliches Sharing-Menü mit allen LMC-Klassikern in vegetabiler Form.</p>
+      <span class="arrow">Mehr →</span>
+    </a>
+
+    <a class="menu-card" href="menus.html#a-la-carte">
+      <span class="tag">à la Carte</span>
+      <h3>A la Carte</h3>
+      <p class="desc">Dim Sum, Dumplings und Hauptgerichte einzeln auswählen — kalt, warm, gedämpft, gebraten, gegrillt.</p>
+      <span class="arrow">Karte ansehen →</span>
+    </a>
+
+  </div>
+
+  <div class="center mt-3">
+    <a href="menus.html#getraenke" class="btn btn-outline" style="margin-right: 0.5rem;">Getränkekarte</a>
+    <a href="menus.html#weinkarte" class="btn btn-outline" style="margin-right: 0.5rem;">Weinkarte</a>
+    <a href="menus.html#wein-specials" class="btn btn-outline">Wein-Specials</a>
+  </div>
+</section>
+
+<!-- ============ AWARDS ============ -->
+<section class="section light awards" aria-label="Auszeichnungen">
+  <h2 class="h-section">Ausgezeichnet</h2>
+  <p class="h-hero" style="max-width: 38rem; margin: 1rem auto 0;">
+    Wir freuen uns über die Anerkennung unserer Küche durch internationale Restaurantführer.
+  </p>
+  <div class="award-row" aria-label="Auszeichnungen">
+    <!-- Foto-Platzhalter, später Award-Logos -->
+    <div class="award"><span>Bib</span><span>Gourmand</span><span>2022</span></div>
+    <div class="award"><span>Bib</span><span>Gourmand</span><span>2025</span></div>
+    <div class="award"><span>Gault</span><span>Millau</span><span>2024/25</span></div>
+    <div class="award"><span>Varta</span><span>2025</span></div>
+    <div class="award"><span>Falstaff</span></div>
+  </div>
+</section>
+
+<!-- ============ PRESSE ============ -->
+<section class="section dark press" id="presse" aria-label="Pressestimmen">
+  <h2 class="h-section">Stimmen</h2>
+
+  <div class="quote-grid mt-3">
+    <div class="quote">
+      <p>„Eine coole, lebendige Adresse. Aus der einsehbaren Küche kommen chinesisch-kantonesische Gerichte in Form von verschiedenen Dim Sum und Dumplings – ideal zum Teilen."</p>
+      <span class="source">
+        <a href="https://guide.michelin.com/de/de/berlin-region/berlin/restaurant/long-march-canteen" target="_blank" rel="noopener">Guide Michelin</a>
+      </span>
+    </div>
+    <div class="quote">
+      <p>„In der Long March Canteen kann man richtig gut und original südchinesisch essen, also alles andere als Reis mit Scheiß und Bratnudeln."</p>
+      <span class="source">
+        <a href="https://mitvergnuegen.com/40-days-of-eating/40-days-eating-2015-16-long-march-canteen/" target="_blank" rel="noopener">Mit Vergnügen</a>
+      </span>
+    </div>
+    <div class="quote">
+      <p>„Ich bin immer dankbar, wenn ich einen Ort entdecke, der authentische Küche bietet – wie das chinesische Restaurant Long March Canteen in Kreuzberg."</p>
+      <span class="source">
+        <a href="https://ceecee.cc/long-march-canteen-zeitgenossische-chinesische-kuche/" target="_blank" rel="noopener">Cee Cee</a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT / INFO ============ -->
+<section class="section light info" id="kontakt" aria-label="Adresse und Öffnungszeiten">
+  <h2 class="h-section center" style="margin-bottom: 3rem;">Adresse &amp; Öffnungszeiten</h2>
+
+  <div class="info-grid">
+
+    <div class="info-block">
+      <h3>Adresse</h3>
+      <p>
+        Long March Canteen<br>
+        Wrangelstraße 20<br>
+        10997 Berlin – Kreuzberg
+      </p>
+      <p class="mt-1">
+        <a href="https://goo.gl/maps/AJ4xyw9CCgR8eVSo9" target="_blank" rel="noopener">Route via Google Maps</a>
+      </p>
+    </div>
+
+    <div class="info-block opening">
+      <h3>Öffnungszeiten</h3>
+      <dl>
+        <dt>Mo – Do</dt><dd>18:00 – 23:00</dd>
+        <dt>Fr &amp; Sa</dt><dd>18:00 – 23:30</dd>
+        <dt>So</dt><dd>geschlossen</dd>
+      </dl>
+      <p class="mt-2" style="opacity:0.7; font-size: 0.85rem;">Reservierungstelefon täglich ab 12:00 Uhr.</p>
+    </div>
+
+    <div class="info-block">
+      <h3>Kontakt</h3>
+      <p>
+        <a href="tel:+491788849599">+49 178 88 49 599</a> (Reservierung)<br>
+        <a href="tel:+493031176789">030 / 311 767 89</a> (Restaurant)<br>
+        <a href="mailto:info@longmarchcanteen.com">info@longmarchcanteen.com</a>
+      </p>
+      <p class="mt-1">
+        <a href="https://www.instagram.com/long_march_canteen" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://www.facebook.com/LongMarchCanteenBerlin" target="_blank" rel="noopener">Facebook</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <img src="LMC-Logo-Black.svg" alt="Long March Canteen" class="footer-logo">
+      <p style="font-family: var(--font-cond); font-size: 0.95rem; line-height: 1.5; max-width: 18rem;">
+        Chinesisch-kantonesische Dim Sum &amp; Sharing Dishes in Berlin Kreuzberg.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Restaurant</h4>
+      <ul>
+        <li><a href="#reservieren">Reservieren</a></li>
+        <li><a href="#menus">Menüs</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Mehr</h4>
+      <ul>
+        <li><a href="https://lmcshop-2880.myshopify.com/" target="_blank" rel="noopener">Shop</a></li>
+        <li><a href="https://www.instagram.com/long_march_canteen" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/LongMarchCanteenBerlin" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <ul>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Long March Canteen GmbH</span>
+    <span>Berlin · Kreuzberg</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile Nav Toggle
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('nav-mobile-open');
+  });
+
+  // Close mobile menu after clicking a link
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => nav.classList.remove('nav-mobile-open'));
+  });
+
+  // Nav-Hintergrund weich überblenden — über die gesamte Hero-Höhe.
+  // Progress 0 = transparent + weiße Schrift, Progress 1 = blur + 60% helle Fläche + schwarze Schrift.
+  const hero = document.querySelector('.hero');
+  const setNavScrolled = () => {
+    const heroEl = hero || document.body;
+    // Nutze die volle sichtbare Hero-Höhe (oder Viewport als Fallback)
+    const heroHeight = heroEl ? heroEl.offsetHeight : window.innerHeight;
+    // Maximaler Fortschritt erreicht, wenn ca. 90% des Heros gescrollt sind — Übergang dehnt sich über fast die ganze Cover-Höhe
+    const maxScroll = heroHeight * 0.9;
+    const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+    // Alpha für die Fläche: max. 0.6 (60% wie gewünscht)
+    const alpha = (progress * 0.6).toFixed(3);
+    nav.style.setProperty('--nav-progress', progress.toFixed(3));
+    nav.style.setProperty('--nav-alpha', alpha);
+    // Farbumschlag der Schrift erst ab ~55% Progress, damit es smooth wirkt
+    if (progress > 0.55) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', setNavScrolled, { passive: true });
+  window.addEventListener('resize', setNavScrolled, { passive: true });
+  setNavScrolled();
+</script>
+
+</body>
+</html>

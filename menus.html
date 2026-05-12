@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="de" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<title>Menüs – Long March Canteen</title>
+<meta name="description" content="Saisonale Menüs der Long March Canteen – Frühlingsmenü, Dim Sum für Zwei, De Luxe, Meister Afons, Veganes Menü, A la Carte.">
+
+<link rel="stylesheet" href="https://use.typekit.net/kuz5egd.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --offwhite: #f5f5f5;
+    --accent: #ff8845;
+    --radius-lg: 1.94rem;
+    --radius-sm: 1.11rem;
+    --pad-x: 10vw;
+    --pad-y: 6.67rem;
+    --frame-gap: 1.2rem;
+    --font-base: "urw-din", "Barlow", "Inter", system-ui, sans-serif;
+    --font-cond: "urw-din-condensed", "Barlow Condensed", "Inter", system-ui, sans-serif;
+    --font-semi: "urw-din-semi-condensed", "Barlow Condensed", "Inter", system-ui, sans-serif;
+
+    /* Theme-Tokens — werden im Light Mode überschrieben */
+    --bg: #000000;
+    --fg: #ffffff;
+    --fg-muted: rgba(255, 255, 255, 0.7);
+    --fg-faint: rgba(255, 255, 255, 0.55);
+    --border-soft: rgba(255, 255, 255, 0.15);
+    --border-faint: rgba(255, 255, 255, 0.08);
+    --nav-bg: rgba(0, 0, 0, 0.6);
+    --tab-line: rgba(255, 255, 255, 0.12);
+    --tab-line-strong: rgba(255, 255, 255, 0.35);
+  }
+
+  /* ---------- Auto Light Mode (folgt System-Einstellung) ---------- */
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --fg-muted: rgba(0, 0, 0, 0.68);
+      --fg-faint: rgba(0, 0, 0, 0.5);
+      --border-soft: rgba(0, 0, 0, 0.14);
+      --border-faint: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.75);
+      --tab-line: rgba(0, 0, 0, 0.12);
+      --tab-line-strong: rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  @media (max-width: 543px) { html { font-size: 16px; } }
+  body {
+    font-family: var(--font-base);
+    font-weight: 500;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .25s ease, color .25s ease;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  /* ---------- Top Bar ---------- */
+  header.menu-nav {
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: var(--nav-bg);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    height: 3.89rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--pad-x);
+    color: var(--fg);
+    gap: 1rem;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .menu-nav .back-link {
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: color .2s;
+    white-space: nowrap;
+  }
+  .menu-nav .back-link:hover { color: var(--accent); }
+  .menu-nav .back-link .arrow { transition: transform .2s; display: inline-block; }
+  .menu-nav .back-link:hover .arrow { transform: translateX(-3px); }
+  .menu-nav .brand {
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+  }
+  .menu-nav .right-cluster {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .menu-nav .lang-switch {
+    display: flex;
+    gap: 0.5rem;
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+  }
+  .lang-switch button { padding: 0; }
+  .lang-switch button.active { font-weight: 600; }
+  .lang-switch button:not(.active) { opacity: 0.4; }
+  .lang-switch button:hover { opacity: 0.8; }
+  .lang-switch .sep { opacity: 0.3; }
+
+  @media (max-width: 543px) {
+    .menu-nav .brand { display: none; }
+    .menu-nav { gap: 0.5rem; }
+    .menu-nav .back-link { font-size: 0.75rem; letter-spacing: 0.2rem; }
+  }
+
+  /* ---------- Tabs: minimalistisch, Text mit Unterstrich ---------- */
+  .menu-tabs {
+    padding: 2.5rem 0 0;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .menu-tabs-inner {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 0 1.1rem;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-faint);
+    padding: 0 var(--pad-x) 0.1rem;
+    margin: 0 auto;
+  }
+  .menu-tab {
+    flex: 0 0 auto;
+    padding: 0.7rem 0.1rem;
+    font-family: var(--font-semi);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.04rem;
+    text-transform: uppercase;
+    color: var(--fg);
+    opacity: 0.55;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: opacity .2s ease, border-color .2s ease, color .2s ease, font-weight .2s ease;
+    white-space: nowrap;
+    line-height: 1.1;
+    margin-bottom: -1px;
+  }
+  .menu-tab:hover { opacity: 0.9; }
+  .menu-tab.active {
+    opacity: 1;
+    font-weight: 800;
+    border-bottom-color: var(--accent);
+    color: var(--fg);
+  }
+
+  /* ---- Sub-Tabs für Getränke (visuell etwas kleiner & gedämpfter) ---- */
+  .drink-tabs {
+    padding: 2.5rem 0 0;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .drink-tabs::-webkit-scrollbar { display: none; }
+  .drink-tabs-inner {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 0 1rem;
+    justify-content: center;
+    border-bottom: 1px dashed var(--border-faint);
+    padding: 0 var(--pad-x) 0.1rem;
+    margin: 0 auto;
+  }
+  .drink-tab {
+    flex: 0 0 auto;
+    padding: 0.6rem 0.1rem;
+    font-family: var(--font-semi);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.06rem;
+    text-transform: uppercase;
+    color: var(--fg);
+    opacity: 0.5;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: opacity .2s ease, border-color .2s ease, font-weight .2s ease;
+    white-space: nowrap;
+    line-height: 1.1;
+    margin-bottom: -1px;
+  }
+  .drink-tab:hover { opacity: 0.85; }
+  .drink-tab.active {
+    opacity: 1;
+    font-weight: 800;
+    border-bottom-color: var(--accent);
+  }
+
+  @media (max-width: 543px) {
+    .menu-tabs { padding: 1.8rem 0 0; }
+    .menu-tabs-inner {
+      gap: 0 0.8rem;
+      justify-content: flex-start;
+      padding: 0 1.2rem 0.1rem;
+    }
+    .menu-tab {
+      font-size: 0.72rem;
+      letter-spacing: 0.03rem;
+      padding: 0.6rem 0.05rem;
+    }
+    .drink-tabs { padding: 1.6rem 0 0; }
+    .drink-tabs-inner {
+      gap: 0 0.7rem;
+      justify-content: flex-start;
+      padding: 0 1.2rem 0.1rem;
+    }
+    .drink-tab {
+      font-size: 0.68rem;
+      letter-spacing: 0.03rem;
+    }
+  }
+
+  /* ---------- Menü-Content ---------- */
+  .menu-content {
+    padding: 3rem var(--pad-x) 6rem;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; animation: fadeIn .3s ease; }
+  .drink-panel { display: none; }
+  .drink-panel.active { display: block; animation: fadeIn .3s ease; }
+
+  /* Wenn ein Getränke-Panel aktiv ist, blendet das Speisen-Main aus
+     – wird per Body-Klasse gesteuert. */
+  body.drinks-active .menu-content { display: none; }
+  body:not(.drinks-active) .drink-content { display: none; }
+  .drink-content {
+    padding: 3rem var(--pad-x) 6rem;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- Großer Menü-Titel pro Panel ---- */
+  .menu-header {
+    text-align: center;
+    padding-bottom: 2.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .menu-header h2 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 2.5rem;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+  }
+  @media (max-width: 767px) {
+    .menu-header h2 { font-size: 1.8rem; }
+  }
+  .menu-header .menu-header-sub {
+    font-family: var(--font-semi);
+    font-size: 0.78rem;
+    letter-spacing: 0.22rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ---- Preis-Block am Ende des Menüs ---- */
+  .menu-price-footer {
+    text-align: center;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  .menu-price-footer .price-big {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 0.05rem;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .menu-price-footer .price-sub {
+    font-family: var(--font-semi);
+    font-size: 0.78rem;
+    letter-spacing: 0.22rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 0.6rem;
+  }
+  @media (max-width: 767px) {
+    .menu-price-footer .price-big { font-size: 1.6rem; }
+  }
+
+  .menu-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .menu-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .menu-section h3 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    opacity: 0.55;
+  }
+  .menu-section h4 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    margin: 1.6rem 0 1rem;
+    opacity: 0.5;
+  }
+  .menu-section ul { list-style: none; }
+  .menu-section li {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    padding: 0.55rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+  .menu-section li .dish { flex: 1; }
+  .menu-section li .dish small {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-top: 0.15rem;
+  }
+  .menu-section li .price-tag {
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.05rem;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .menu-section li .price-tag .pt-line {
+    display: block;
+    line-height: 1.35;
+  }
+  .menu-section li .tag {
+    display: inline-block;
+    font-family: var(--font-semi);
+    font-size: 0.6rem;
+    letter-spacing: 0.18rem;
+    text-transform: uppercase;
+    padding: 0.12rem 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 0.25rem;
+    background: var(--border-faint);
+    opacity: 0.75;
+    vertical-align: middle;
+  }
+  .menu-note {
+    font-family: var(--font-cond);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    opacity: 0.6;
+    margin: 1.4rem 0 0;
+    max-width: 42rem;
+  }
+  .menu-section li .tag.vegan { color: var(--accent); }
+
+  .menu-intro {
+    font-family: var(--font-cond);
+    font-weight: 300;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    opacity: 0.85;
+    max-width: 42rem;
+  }
+
+  .menu-cta {
+    margin-top: 4rem;
+    padding: 3rem;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    text-align: center;
+  }
+  .menu-cta h4 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .menu-cta p {
+    font-family: var(--font-cond);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.75;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    border-radius: 2.2rem;
+    font-family: var(--font-semi);
+    font-size: 0.9rem;
+    letter-spacing: 0.18rem;
+    text-transform: uppercase;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+    text-decoration: none !important;
+    line-height: 1.1;
+    text-align: center;
+  }
+  .btn-primary { background: var(--fg); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent); color: #000; }
+
+  /* ---------- Footer ---------- */
+  .menu-footer {
+    padding: 3rem var(--pad-x);
+    background: var(--bg);
+    border-top: 1px solid var(--border-faint);
+    text-align: center;
+    font-family: var(--font-semi);
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .menu-footer a:hover { color: var(--accent); }
+
+  /* ---------- i18n helpers ---------- */
+  [data-i18n] .lang-en { display: none; }
+  html[lang="en"] [data-i18n] .lang-de { display: none; }
+  html[lang="en"] [data-i18n] .lang-en { display: inline; }
+</style>
+</head>
+<body>
+
+<header class="menu-nav">
+  <a href="index.html" class="back-link">
+    <span class="arrow">←</span>
+    <span data-i18n><span class="lang-de">Zurück</span><span class="lang-en">Back</span></span>
+  </a>
+  <div class="right-cluster">
+    <span class="brand">Long March Canteen</span>
+    <span class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="active" id="langDe" aria-pressed="true">DE</button>
+      <span class="sep">/</span>
+      <button type="button" id="langEn" aria-pressed="false">EN</button>
+    </span>
+  </div>
+</header>
+
+<nav class="menu-tabs" aria-label="Speisekarte – Menü-Auswahl">
+  <div class="menu-tabs-inner" role="tablist">
+    <button class="menu-tab active" data-tab="fruehling" role="tab" data-i18n><span class="lang-de">Frühlingsmenü</span><span class="lang-en">Spring Menu</span></button>
+    <button class="menu-tab" data-tab="dim-sum-zwei" role="tab" data-i18n><span class="lang-de">Dim Sum für Zwei</span><span class="lang-en">Dim Sum for Two</span></button>
+    <button class="menu-tab" data-tab="de-luxe" role="tab" data-i18n><span class="lang-de">De Luxe</span><span class="lang-en">De Luxe</span></button>
+    <button class="menu-tab" data-tab="meister-afon" role="tab" data-i18n><span class="lang-de">Meister Afon</span><span class="lang-en">Master Afon</span></button>
+    <button class="menu-tab" data-tab="vegan" role="tab" data-i18n><span class="lang-de">Vegan</span><span class="lang-en">Vegan</span></button>
+    <button class="menu-tab" data-tab="a-la-carte" role="tab" data-i18n><span class="lang-de">A la Carte</span><span class="lang-en">A la Carte</span></button>
+  </div>
+</nav>
+
+<nav class="drink-tabs" aria-label="Getränke-Auswahl">
+  <div class="drink-tabs-inner" role="tablist">
+    <button class="drink-tab" data-drink="getraenke" role="tab" data-i18n><span class="lang-de">Getränkekarte</span><span class="lang-en">Drinks &amp; Cocktails</span></button>
+    <button class="drink-tab" data-drink="weinkarte" role="tab" data-i18n><span class="lang-de">Weinkarte</span><span class="lang-en">Wine List</span></button>
+    <button class="drink-tab" data-drink="wein-specials" role="tab" data-i18n><span class="lang-de">Wein-Specials</span><span class="lang-en">Wine Specials</span></button>
+  </div>
+</nav>
+
+<main class="menu-content">
+
+  <!-- ============ FRÜHLINGSMENÜ / SPRING MENU ============ -->
+  <article class="menu-panel active" data-panel="fruehling">
+    <header class="menu-header">
+      <h2 data-i18n><span class="lang-de">Frühlingsmenü</span><span class="lang-en">Spring Menu</span></h2>
+      <div class="menu-header-sub" data-i18n><span class="lang-de">ab 2 Personen</span><span class="lang-en">2 people and up</span></div>
+    </header>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Kalte Dim Sum</span><span class="lang-en">Cold Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Kohlrabisalat – Leinsamen – Sesam – Chiasamen – Koriander – Wasabi-Soja <span class="tag vegan">Vegan</span></span><span class="lang-en">Kohlrabi Salad – flaxseed – sesame – chia seeds – coriander – wasabi soy <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Carpaccio No.3 vom Ochsenbäckchen – Reiswein – Chili – Zimt – Sternanis – Goji</span><span class="lang-en">Carpaccio No.3 of Ox Cheeks – rice wine – chili – cinnamon – star anise – goji</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Super-Sashimi vom Tuna – Rote Beete – Wasabi – Sojabohnen</span><span class="lang-en">Tuna Super-Sashimi – red beetroot – wasabi – soybeans</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Warme Dim Sum</span><span class="lang-en">Warm Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Classic Edamame – Meersalz – im Körbchen serviert</span><span class="lang-en">Classic Edamame – sea salt flakes – served in a steam basket <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Gedämpfter Spinat – geheime Sesamcreme – Knoblauch <span class="tag vegan">Vegan</span></span><span class="lang-en">Steamed Spinach – secret sesame cream – garlic <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Weltbeste Schweinerippchen – Soja-Honig-Sauce – Koriander</span><span class="lang-en">The Perfect Spare Ribs – honey soy sauce – coriander</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Grüner Spargel – Wachteleier – knuspriger Seetang – Zitronensaft – Wasabi-Mayo <span class="tag">Vegetarisch</span></span><span class="lang-en">Green Asparagus – quail eggs – crispy seaweed – lemon juice – wasabi mayo <span class="tag">Vegetarian</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Riesengarnelen am Spieß – roter Szechuan Chili – Knoblauch</span><span class="lang-en">Giant Prawns on Skewers – red Szechuan chili – garlic</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Argentinische Rinderfiletwürfel – rote Zwiebeln – Peperoni – schwarze Pfeffer-Sauce</span><span class="lang-en">Spicy Argentinian Beef Filet Cubes – red onions – peperoni – black pepper sauce</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gedämpft</span><span class="lang-en">Steamed Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Shou Mai – Schwein – Wasserkastanie – Shiitake – garniert mit Kaviar</span><span class="lang-en">Shou Mai – pork – water chestnut – shiitake – topped with caviar</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gebraten</span><span class="lang-en">Baked Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">White Chicken – Hühnchen – Thaibasilikum – Ingwer – Chili</span><span class="lang-en">White Chicken – chicken – Thai basil – ginger – chili</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dessert</span><span class="lang-en">Dessert</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Dark &amp; Spicy – Parfait von dunkler Schokolade – Ingwer – Mango-Maracuja-Sauce</span><span class="lang-en">Dark &amp; Spicy – parfait of dark chocolate – ginger – mango and passion fruit sauce</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-price-footer">
+      <div class="price-big">69 € <span data-i18n><span class="lang-de">pro Person</span><span class="lang-en">per person</span></span></div>
+      <div class="price-sub" data-i18n><span class="lang-de">ab 2 Personen</span><span class="lang-en">2 people and up</span></div>
+    </div>
+
+    <div class="menu-cta">
+      <h4 data-i18n><span class="lang-de">Bereit für den Frühling?</span><span class="lang-en">Ready for spring?</span></h4>
+      <p data-i18n>
+        <span class="lang-de">Reservieren Sie online oder telefonisch täglich ab 12:00 Uhr.</span>
+        <span class="lang-en">Reserve online or by phone daily from 12:00.</span>
+      </p>
+      <a href="index.html#reservieren" class="btn btn-primary" data-i18n><span class="lang-de">Tisch reservieren</span><span class="lang-en">Book a table</span></a>
+    </div>
+  </article>
+
+  <!-- ============ DIM SUM FÜR ZWEI ============ -->
+  <article class="menu-panel" data-panel="dim-sum-zwei">
+    <header class="menu-header">
+      <h2 data-i18n><span class="lang-de">Dim Sum für Zwei</span><span class="lang-en">Dim Sum for Two</span></h2>
+      <div class="menu-header-sub" data-i18n><span class="lang-de">für 2 Personen</span><span class="lang-en">for 2 people</span></div>
+    </header>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Kalte Dim Sum</span><span class="lang-en">Cold Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Gurkenstreifen – Essig – Knoblauch – Sesam-Chili-Öl</span><span class="lang-en">Cucumber sticks – vinegar – garlic – sesame-chili-oil</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Carpaccio No.2 vom Rosa Roastbeef – Koriander – Chili – Soja-Sauce</span><span class="lang-en">Carpaccio No.2 of Pink Roast Beef – coriander – chili – soy sauce</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Super-Sashimi vom Tuna – Rote Beete – Wasabi – Sojabohnen</span><span class="lang-en">Tuna Super-Sashimi – red beetroot – wasabi – soybeans</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Warme Dim Sum</span><span class="lang-en">Warm Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Classic Edamame – Meersalz – im Körbchen serviert <span class="tag vegan">Vegan</span></span><span class="lang-en">Classic Edamame – sea salt flakes – served in a steam basket <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Süßkartoffel-Pommes – Meersalz – Szechuanpfeffer-Mayo <span class="tag">Vegetarisch</span></span><span class="lang-en">Sweet Potato Bites – sea salt – Szechuan pepper mayo <span class="tag">Vegetarian</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Black Tiger Garnelen – geräucherter Aal – Serranoschinken – Wachtelei – Lauch</span><span class="lang-en">Black Tiger Prawns – smoked eel – serrano ham – quail eggs – leek</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Hühnchen Kebap – Wasserkastanien – Lauch – Limetten-Honig-Marinade</span><span class="lang-en">Chicken Kebap – water chestnut – leek – honey-lime marinade</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gedämpft</span><span class="lang-en">Steamed Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">2× Shanghai – Schwein – Ingwer – Szechuanpfeffer – Brühe</span><span class="lang-en">2× Shanghai – pork – ginger – Szechuan pepper – broth</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">2× Orange Prawn – Garnelen – Wasserkastanie – Szechuanpfeffer – Ei – Bambus</span><span class="lang-en">2× Orange Prawn – prawns – water chestnut – Szechuan pepper – egg – bamboo</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gebraten</span><span class="lang-en">Baked Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">2× Green Veggie – Zucchini – Shiitake – Bambus – Karotten – Koriander <span class="tag vegan">Vegan</span></span><span class="lang-en">2× Green Veggie – zucchini – shiitake – bamboo – carrots – coriander <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">2× Black Beef – Rind – Sellerie – Szechuanpfeffer</span><span class="lang-en">2× Black Beef – beef – celery – Szechuan pepper</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dessert</span><span class="lang-en">Dessert</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Frisches Sorbet – wechselnde hausgemachte Sorten <span class="tag vegan">Vegan</span></span><span class="lang-en">Fresh Sorbet – varying homemade choices <span class="tag vegan">Vegan</span></span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-price-footer">
+      <div class="price-big">55 € <span data-i18n><span class="lang-de">pro Person</span><span class="lang-en">per person</span></span></div>
+      <div class="price-sub" data-i18n><span class="lang-de">für 2 Personen</span><span class="lang-en">for 2 people</span></div>
+    </div>
+  </article>
+
+  <!-- ============ DE LUXE ============ -->
+  <article class="menu-panel" data-panel="de-luxe">
+    <header class="menu-header">
+      <h2 data-i18n><span class="lang-de">De Luxe</span><span class="lang-en">De Luxe</span></h2>
+      <div class="menu-header-sub" data-i18n><span class="lang-de">ab 3 Personen</span><span class="lang-en">3 people and up</span></div>
+    </header>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Kalte Dim Sum</span><span class="lang-en">Cold Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Gedämpfte marinierte Aubergine – frischer Ingwer – „Lau Zhen Zhu"-Essig <span class="tag vegan">Vegan</span></span><span class="lang-en">Steamed Marinated Eggplant – fresh ginger – "Lau Zhen Zhu" vinegar <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Konjakwurzel Nudeln – Chili – Knoblauch – Sesamöl – Edamame <span class="tag vegan">Vegan</span></span><span class="lang-en">Konjac Root Noodles – chili – garlic – sesame oil – edamame <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Carpaccio No.2 vom Rosa Roastbeef – Koriander – Chili – Soja-Sauce</span><span class="lang-en">Carpaccio No.2 of Pink Roast Beef – coriander – chili – soy sauce</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Super-Sashimi vom Tuna – Rote Beete – Wasabi – Sojabohnen</span><span class="lang-en">Tuna Super-Sashimi – red beetroot – wasabi – soybeans</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Warme Dim Sum</span><span class="lang-en">Warm Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Classic Edamame – Meersalz – im Körbchen serviert <span class="tag vegan">Vegan</span></span><span class="lang-en">Classic Edamame – sea salt flakes – served in a steam basket <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Knackiger Pak Choi – Chilifäden – Mushroom-Sauce <span class="tag vegan">Vegan</span></span><span class="lang-en">Juicy Bok Choy – chili threads – mushroom sauce <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Weltbeste Schweinerippchen – Soja-Honig-Sauce – Koriander</span><span class="lang-en">The Perfect Spare Ribs – honey-soy sauce – coriander</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Des Kaisers Frühlingsröllchen – Rindfleisch – Wasserkastanien – köstlicher Dip</span><span class="lang-en">Emperor Mini-Spring Rolls – beef – water chestnuts – delicious dip</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Power Brokkoli – vegane BBQ-Sauce – Knoblauchstreusel <span class="tag vegan">Vegan</span></span><span class="lang-en">Power Broccoli – vegan BBQ sauce – garlic crumble <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Frische Jakobsmuscheln – auf Seidentofu – Myling Soja-Sauce – Chili-Öl</span><span class="lang-en">Fresh Scallops – on silken tofu – myling soy sauce – chili oil</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Rosa Entenbrust Peking Style – Gemüse – Hoisin-Sauce – Pfannkuchen – zum Selberrollen</span><span class="lang-en">Pink Peking Style Duck Breast – vegetables – hoisin sauce – pancakes – DIY-style</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gedämpft</span><span class="lang-en">Steamed Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Shanghai – Schwein – Ingwer – Szechuanpfeffer – Brühe</span><span class="lang-en">Shanghai – pork – ginger – Szechuan pepper – broth</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gebraten</span><span class="lang-en">Baked Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Orange Prawn – Garnelen – Wasserkastanie – Szechuanpfeffer – Ei – Bambus</span><span class="lang-en">Orange Prawn – prawns – water chestnut – Szechuan pepper – egg – bamboo</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dessert</span><span class="lang-en">Dessert</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">The Real Thing – unsere saftige klebrige knusprige zuckrige Superbanana <span class="tag vegan">Vegan</span></span><span class="lang-en">The Real Thing – our juicy sticky crispy sugary superbanana <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Tang Bao – warme Hefedumplings – Schoko-Nougat – Zimt &amp; Kakao – Vanille-Sauce</span><span class="lang-en">Tang Bao – warm yeast dumplings – chocolate-nougat – cinnamon &amp; cocoa – vanilla sauce</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-price-footer">
+      <div class="price-big">63 € <span data-i18n><span class="lang-de">pro Person</span><span class="lang-en">per person</span></span></div>
+      <div class="price-sub" data-i18n><span class="lang-de">ab 3 Personen</span><span class="lang-en">3 people and up</span></div>
+    </div>
+  </article>
+
+  <!-- ============ MEISTER AFON ============ -->
+  <article class="menu-panel" data-panel="meister-afon">
+    <header class="menu-header">
+      <h2 data-i18n><span class="lang-de">Meister Afon</span><span class="lang-en">Master Afon</span></h2>
+      <div class="menu-header-sub" data-i18n><span class="lang-de">ab 3 Personen</span><span class="lang-en">3 people and up</span></div>
+    </header>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Kalte Dim Sum</span><span class="lang-en">Cold Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Zarter Oktopussalat – Kohlrabistreifen – marinierte Radieschen – Honig-Limetten-Dressing</span><span class="lang-en">Delicate Octopus Salad – marinated kohlrabi – honey-lime dressing</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">1000-jährige Eier – Seidentofuwürfel – Szechuan-Salzgemüse <span class="tag">Vegetarisch</span></span><span class="lang-en">1000-Year-Old Eggs – silken tofu cubes – Szechuan salted vegetables <span class="tag">Vegetarian</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Süßer Brandenburger Karpfen – dunkle Mushroom-Soja-Sauce – Shanghai Style</span><span class="lang-en">Sweet Brandenburg Carp – dark mushroom soy sauce – Shanghai-style</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Carpaccio No.2 vom Rosa Roastbeef – Koriander – Chili – Soja-Sauce</span><span class="lang-en">Carpaccio No.2 of Pink Roast Beef – coriander – chili – soy sauce</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Warme Dim Sum</span><span class="lang-en">Warm Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Classic Edamame – Meersalz – im Körbchen serviert <span class="tag vegan">Vegan</span></span><span class="lang-en">Classic Edamame – sea salt flakes – served in a steam basket <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Krosse Wachtel – im Gemüsenest – Yuja-Rotwein-Dip</span><span class="lang-en">Baked Quail – nest of vegetables – yuja red wine dip</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Zarte Baby-Calamari am Spieß wie bei Meister Afon in Zhejiang</span><span class="lang-en">Chef Afon's Exquisite Tender Baby Squids on Skewers – Zhejiang style</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Power Brokkoli – vegane BBQ-Sauce – Knoblauchstreusel <span class="tag vegan">Vegan</span></span><span class="lang-en">Power Broccoli – vegan BBQ sauce – garlic crumble <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Traditionelle Aubergine – unbeschreibliche Sauce – Frühlingszwiebeln <span class="tag vegan">Vegan</span></span><span class="lang-en">Traditional Eggplant – amazing secret sauce – spring onions <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Frische Jakobsmuscheln – auf Seidentofu – Myling Soja-Sauce – Chili-Öl</span><span class="lang-en">Fresh Scallops – on silken tofu – myling soy sauce – chili oil</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Rosa Entenbrust Peking Style – Gemüse – Hoisin-Sauce – Pfannkuchen – zum Selberrollen</span><span class="lang-en">Pink Peking Style Duck Breast – vegetables – hoisin sauce – pancakes – DIY-style</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gedämpft</span><span class="lang-en">Steamed Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Orange Prawn – Garnelen – Wasserkastanie – Szechuanpfeffer – Ei – Bambus</span><span class="lang-en">Orange Prawn – prawns – water chestnut – Szechuan pepper – egg – bamboo</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gebraten</span><span class="lang-en">Baked Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Baozi – Schwein – Ingwer – Pfeffer</span><span class="lang-en">Baozi – pork – ginger – pepper</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dessert</span><span class="lang-en">Dessert</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Frisches Sorbet – wechselnde hausgemachte Sorten <span class="tag vegan">Vegan</span></span><span class="lang-en">Fresh Sorbet – varying homemade choices <span class="tag vegan">Vegan</span></span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">The Real Thing – unsere saftige klebrige knusprige zuckrige Superbanana <span class="tag vegan">Vegan</span></span><span class="lang-en">The Real Thing – our juicy sticky crispy sugary superbanana <span class="tag vegan">Vegan</span></span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-price-footer">
+      <div class="price-big">65 € <span data-i18n><span class="lang-de">pro Person</span><span class="lang-en">per person</span></span></div>
+      <div class="price-sub" data-i18n><span class="lang-de">ab 3 Personen</span><span class="lang-en">3 people and up</span></div>
+    </div>
+  </article>
+
+  <!-- ============ VEGAN ============ -->
+  <article class="menu-panel" data-panel="vegan">
+    <header class="menu-header">
+      <h2 data-i18n><span class="lang-de">Veganes Menü</span><span class="lang-en">Vegan Menu</span></h2>
+      <div class="menu-header-sub" data-i18n><span class="lang-de">ab 2 Personen</span><span class="lang-en">2 people and up</span></div>
+    </header>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Kalte Dim Sum</span><span class="lang-en">Cold Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Gurkenstreifen – Essig – Knoblauch – Sesam-Chili-Öl</span><span class="lang-en">Cucumber Sticks – vinegar – garlic – sesame-chili-oil</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Frischer Koriander-Salat – geröstete Walnüsse – Zitronen-Apfelessig – Sesam</span><span class="lang-en">Fresh Cilantro Salad – roasted walnuts – lemon-apple-vinegar – sesame</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Chinesische Bauernpizza – Gemüse – Koriander – Sesam</span><span class="lang-en">Chinese Farmer's Pizza – vegetables – coriander – sesame</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Warme Dim Sum</span><span class="lang-en">Warm Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Classic Edamame – Meersalz – im Körbchen serviert</span><span class="lang-en">Classic Edamame – sea salt flakes – served in a steam basket</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Gedämpfter Spinat – geheime Sesamcreme – Knoblauch</span><span class="lang-en">Steamed Spinach – secret sesame cream – garlic</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Knusprige Tofu Würfel – Knoblauch – Chili – Thai-Basilikum – Meersalz</span><span class="lang-en">Crispy Tofu Cubes – garlic – chili – Thai basil – sea salt</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Traditionelle Aubergine – unbeschreibliche Sauce – Frühlingszwiebeln</span><span class="lang-en">Traditional Eggplant – amazing secret sauce – spring onions</span></span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Power Brokkoli – vegetarische BBQ-Sauce – Knoblauchstreusel</span><span class="lang-en">Power Broccoli – vegetarian BBQ sauce – garlic crumble</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gedämpft</span><span class="lang-en">Steamed Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Sweet Potato – Süßkartoffel – Walnuss</span><span class="lang-en">Sweet Potato – sweet potato – walnut</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings gebraten</span><span class="lang-en">Baked Dumplings</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Green Veggie – Zucchini – Shiitake – Bambus – Karotten – Koriander</span><span class="lang-en">Green Veggie – zucchini – shiitake – bamboo – carrots – coriander</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dessert</span><span class="lang-en">Dessert</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Frisches Sorbet – wechselnde hausgemachte Sorten</span><span class="lang-en">Fresh Sorbet – varying homemade choices</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-price-footer">
+      <div class="price-big">55 € <span data-i18n><span class="lang-de">pro Person</span><span class="lang-en">per person</span></span></div>
+      <div class="price-sub" data-i18n><span class="lang-de">ab 2 Personen</span><span class="lang-en">2 people and up</span></div>
+    </div>
+  </article>
+
+  <!-- ============ A LA CARTE ============ -->
+  <article class="menu-panel" data-panel="a-la-carte">
+    <header class="menu-header">
+      <h2 data-i18n><span class="lang-de">A la Carte</span><span class="lang-en">A la Carte</span></h2>
+      <div class="menu-header-sub" data-i18n><span class="lang-de">einzeln auswählen — kalt, warm, gedämpft, gebraten, gegrillt</span><span class="lang-en">choose individually — cold, warm, steamed, baked, grilled</span></div>
+    </header>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Kalte Dim Sum</span><span class="lang-en">Cold Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Weisser Rettich – Chili – knackig und scharf – gereift im Porzellantopf <span class="tag vegan">Vegan</span></span><span class="lang-en">White Radish – chili – spicy and crispy – matured in porcelain pot <span class="tag vegan">Vegan</span></span></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Gurkenstreifen – Essig – Knoblauch – Sesam-Chili-Öl <span class="tag vegan">Vegan</span></span><span class="lang-en">Cucumber Sticks – vinegar – garlic – sesame-chili-oil <span class="tag vegan">Vegan</span></span></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Kohlrabisalat – Leinsamen – Sesam – Chiasamen – Koriander – Wasabi-Soja <span class="tag vegan">Vegan</span></span><span class="lang-en">Kohlrabi Salad – flaxseed – sesame – chia seeds – coriander – wasabi soy <span class="tag vegan">Vegan</span></span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Konjakwurzel Nudeln – Chili – Knoblauch – Sesamöl – Edamame <span class="tag vegan">Vegan</span></span><span class="lang-en">Konjac Root Noodles – chili – garlic – sesame oil – edamame <span class="tag vegan">Vegan</span></span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Gedämpfte marinierte Aubergine – frischer Ingwer – „Lau Zhen Zhu"-Essig <span class="tag vegan">Vegan</span></span><span class="lang-en">Steamed Marinated Eggplant – fresh ginger – "Lau Zhen Zhu" vinegar <span class="tag vegan">Vegan</span></span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">1000-jährige Eier – Seidentofuwürfel – Szechuan-Salzgemüse <span class="tag">Vegetarisch</span></span><span class="lang-en">1000-Year-Old Eggs – silken tofu cubes – Szechuan salted vegetables <span class="tag">Vegetarian</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Frischer Koriander-Salat – getrocknete Baby-Shrimps oder geröstete Walnüsse – Zitronen-Apfelessig – Sesam <span class="tag vegan">Vegan</span></span><span class="lang-en">Fresh Cilantro Salad – dried baby shrimp or roasted walnuts – lemon-apple-vinegar – sesame <span class="tag vegan">Vegan</span></span></span><span class="price-tag">9,50 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Gedämpfte Okraschoten – Wasabi-Dip – Sesam – Bonitoflocken oder nicht <span class="tag vegan">Vegan</span></span><span class="lang-en">Steamed Okra – wasabi dip – sesame – with or without bonito flakes <span class="tag vegan">Vegan</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Süßer Brandenburger Karpfen – dunkle Mushroom-Soja-Sauce – Shanghai Style</span><span class="lang-en">Sweet Brandenburg Carp – dark mushroom soy sauce – Shanghai style</span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Zarter Oktopussalat – Kohlrabistreifen – marinierte Radieschen – Honig-Limetten-Dressing</span><span class="lang-en">Delicate Octopus Salad – marinated kohlrabi – honey-lime dressing</span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Super-Sashimi vom Tuna – Rote Beete – Wasabi – Sojabohnen</span><span class="lang-en">Tuna Super-Sashimi – red beetroot – wasabi – soybeans</span></span><span class="price-tag">22,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Chinesische Bauernpizza – mariniertes rosa Roastbeef oder Gemüse – Koriander – Sesam <span class="tag vegan">Vegan</span></span><span class="lang-en">Chinese Farmer's Pizza – marinated pink roast beef or vegetables – coriander – sesame <span class="tag vegan">Vegan</span></span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Carpaccio No.1 vom Chicken – Chili-Öl – Erdnussraspeln</span><span class="lang-en">Carpaccio No.1 of Chicken – chili oil – grated peanuts</span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Carpaccio No.2 vom Rosa Roastbeef – Koriander – Chili – Soja-Sauce</span><span class="lang-en">Carpaccio No.2 of Pink Roast Beef – coriander – chili – soy sauce</span></span><span class="price-tag">15,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Carpaccio No.3 vom Ochsenbäckchen – Reiswein – Chili – Zimt – Sternanis – Goji</span><span class="lang-en">Carpaccio No.3 of Ox Cheeks – rice wine – chili – cinnamon – star anise – goji</span></span><span class="price-tag">15,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Warme Dim Sum</span><span class="lang-en">Warm Dim Sum</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Classic Edamame – Meersalz – im Körbchen serviert (250g) <span class="tag vegan">Vegan</span></span><span class="lang-en">Classic Edamame – sea salt flakes – served in a steam basket (250g) <span class="tag vegan">Vegan</span></span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Power Brokkoli – vegane BBQ-Sauce – Knoblauch <span class="tag vegan">Vegan</span></span><span class="lang-en">Power Broccoli – vegan BBQ sauce – garlic crumble <span class="tag vegan">Vegan</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Knackiger Pak Choi – Chilifäden – Mushroom-Sauce <span class="tag vegan">Vegan</span></span><span class="lang-en">Juicy Bok Choy – chili threads – mushroom sauce <span class="tag vegan">Vegan</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Gedämpfter Spinat – geheime Sesamcreme – Knoblauch <span class="tag vegan">Vegan</span></span><span class="lang-en">Steamed Spinach – secret sesame cream – garlic <span class="tag vegan">Vegan</span></span></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Black Tiger Garnelen – geräucherter Aal – Serranoschinken – Wachtelei – Lauch</span><span class="lang-en">Black Tiger Prawns – smoked eel – serrano ham – quail eggs – leek</span></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Traditionelle Aubergine – unbeschreibliche Sauce – Frühlingszwiebeln <span class="tag vegan">Vegan</span></span><span class="lang-en">Traditional Eggplant – amazing secret sauce – spring onions <span class="tag vegan">Vegan</span></span></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Hausgemachte Wantan mit Garnelen – Szechuan Chili-Öl – Salzgemüse</span><span class="lang-en">Homemade Wantan Prawn Filling – Szechuan chili oil – salted vegetables</span></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Weltbeste Schweinerippchen – Soja-Honig-Sauce – Koriander</span><span class="lang-en">The Perfect Spare Ribs – honey soy sauce – coriander</span></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Butterweicher Schweinebauch – dunkle Sojasauce – Pak Choi</span><span class="lang-en">Melt In Your Mouth Pork Belly – dark soy sauce – bok choy</span></span><span class="price-tag">17,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Knusprige Tofu Würfel – Knoblauch – Chili – Thai-Basilikum – Meersalz <span class="tag vegan">Vegan</span></span><span class="lang-en">Crispy Tofu Cubes – garlic – chili – Thai basil – sea salt <span class="tag vegan">Vegan</span></span></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Süßkartoffel-Pommes – Meersalz – Szechuanpfeffer-Mayo <span class="tag">Vegetarisch</span></span><span class="lang-en">Sweet Potato Bites – sea salt – Szechuan pepper mayo <span class="tag">Vegetarian</span></span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Großgarnelen Singapur Style – Wasabi-Mayo – Mango – Orangenzeste</span><span class="lang-en">Large Prawns Singapore Style – wasabi mayo – mango – orange peel</span></span><span class="price-tag">18,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Hausgemachte Kabeljaustäbchen – Honigmelone – Granatapfel – Zitronen-Chili-Sauce</span><span class="lang-en">Baked Codfish Fingers – honeydew melon – pomegranate – lemon-chili-sauce</span></span><span class="price-tag">18,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Traditionelle Shanghai-Frühlingsrolle – Spitzkohl – Bio Hühnchen – Glasnudeln – Chili-Dip</span><span class="lang-en">Traditional Shanghai Spring Roll – sweetheart cabbage – organic chicken – glass noodles – chili-dip</span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Shanghai Frühlingsrolle – Glasnudeln – Wurzelgemüse – Winterbambus – gepresster Tofu <span class="tag vegan">Vegan</span></span><span class="lang-en">Shanghai Spring Roll – glass noodles – root vegetables – winter bamboo – pressed tofu <span class="tag vegan">Vegan</span></span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Des Kaisers Frühlingsröllchen – Rindfleisch – Wasserkastanien – köstlicher Dip</span><span class="lang-en">Emperor Mini-Spring Rolls – beef – water chestnuts – delicious dip</span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Krosse Wachtel – im Gemüsenest – Yuja-Rotwein-Dip</span><span class="lang-en">Baked Quail – nest of vegetables – yuja red wine dip</span></span><span class="price-tag">17,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Grüner Spargel – Wachteleier – knuspriger Seetang – Zitronensaft – Wasabi-Mayo <span class="tag">Vegetarisch</span></span><span class="lang-en">Green Asparagus – quail eggs – crispy seaweed – lemon juice – wasabi mayo <span class="tag">Vegetarian</span></span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Zarte Baby-Calamari am Spieß wie bei Meister Afon in Zhejiang</span><span class="lang-en">Chef Afon's Exquisite Tender Baby Squids on Skewers – Zhejiang style</span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Zwei Riesengarnelen am Spieß – roter Szechuan Chili – Knoblauch</span><span class="lang-en">Two Giant Prawns on Skewers – red Szechuan chili – garlic</span></span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Frische Jakobsmuscheln – auf Seidentofu – Myling Soja-Sauce – Chili-Öl</span><span class="lang-en">Fresh Scallops – on silken tofu – myling soy sauce – chili oil</span></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Krosser Knusperspeck – asiatische Wildkräuter – reichlich Chili</span><span class="lang-en">Crispy Crunchy Bacon – oriental wild herbs – lots of chili</span></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Hühnchen Kebap – Wasserkastanien – Lauch – Limetten-Honig-Marinade</span><span class="lang-en">Chicken Kebap – water chestnut – leek – honey-lime marinade</span></span><span class="price-tag">15,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Argentinische Rinderfiletwürfel – rote Zwiebeln – Peperoni – schwarze Pfeffer-Sauce</span><span class="lang-en">Spicy Argentinian Beef Filet Cubes – red onions – pepperoni – black pepper sauce</span></span><span class="price-tag">22,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Rosa Entenbrust Peking Style – Gemüse – Hoisin-Sauce – Pfannkuchen – zum Selberrollen</span><span class="lang-en">Pink Peking Style Duck Breast – vegetables – hoisin sauce – pancakes – DIY-style</span></span><span class="price-tag">24,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dumplings (4 Stück)</span><span class="lang-en">Dumplings (4 pieces)</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Green Veggie – Zucchini – Shiitake – Bambus – Karotten – Koriander <span class="tag vegan">Vegan</span></span><span class="lang-en">Green Veggie – zucchini – shiitake – bamboo – carrots – coriander <span class="tag vegan">Vegan</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Sweet Potato – Süßkartoffel – Walnuss <span class="tag vegan">Vegan</span></span><span class="lang-en">Sweet Potato – sweet potato – walnut <span class="tag vegan">Vegan</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Ha Gao – Garnelen – Bambus</span><span class="lang-en">Ha Gao – prawns – bamboo</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Orange Prawn – Garnelen – Wasserkastanie – Szechuanpfeffer – Ei – Bambus</span><span class="lang-en">Orange Prawn – prawns – water chestnut – Szechuan pepper – egg – bamboo</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Black Beef – Rind – Sellerie – Szechuanpfeffer</span><span class="lang-en">Black Beef – beef – celery – Szechuan pepper</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">White Chicken – Hühnchen – Thaibasilikum – Ingwer – Chili</span><span class="lang-en">White Chicken – chicken – Thai basil – ginger – chili</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Red Lamb – Lamm – Austern-Sauce</span><span class="lang-en">Red Lamb – lamb – oyster sauce</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Shanghai – Schwein – Ingwer – Szechuanpfeffer – Brühe</span><span class="lang-en">Shanghai – pork – ginger – Szechuan pepper – broth</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Shou Mai – Schwein – Wasserkastanie – Shiitake – garniert mit Kaviar</span><span class="lang-en">Shou Mai – pork – water chestnut – shiitake – topped with caviar</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Cho You Bao (1 großer Hefedumpling) – Schwein – Pilze – Ingwer – süße Austern-Sauce</span><span class="lang-en">Cho You Bao (1 large yeast dumpling) – pork – mushrooms – ginger – sweet oyster sauce</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Su Bao (1 großer Hefedumpling) – Spitzkohl – Tofu – Kaisers Bohnenpaste-Sauce <span class="tag vegan">Vegan</span></span><span class="lang-en">Su Bao (1 large yeast dumpling) – sweetheart cabbage – tofu – emperor's bean paste <span class="tag vegan">Vegan</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Dark Duck – Entenbrust – Maronen – Feigen</span><span class="lang-en">Dark Duck – duck – chestnut – figs</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Baozi – Schwein – Ingwer – Pfeffer</span><span class="lang-en">Baozi – pork – ginger – pepper</span></span><span class="price-tag">10,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Dessert</span><span class="lang-en">Dessert</span></h3>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">The Real Thing – unsere saftige klebrige knusprige zuckrige Superbanana <span class="tag vegan">Vegan</span></span><span class="lang-en">The Real Thing – our juicy sticky crispy sugary superbanana <span class="tag vegan">Vegan</span></span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Tang Bao – warme Hefedumplings – Schoko-Nougat – Zimt &amp; Kakao – Vanille-Sauce</span><span class="lang-en">Tang Bao – warm yeast dumplings – chocolate-nougat – cinnamon &amp; cocoa – vanilla sauce</span></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">White Wedding – Parfait von weißer Schokolade – Maracuja-Sauce – Meersalzflocken</span><span class="lang-en">White Wedding – parfait of white chocolate – passion fruit sauce – sea salt flakes</span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Dark &amp; Spicy – Parfait von dunkler Schokolade – Ingwer – Mango-Maracuja-Sauce</span><span class="lang-en">Dark &amp; Spicy – parfait of dark chocolate – ginger – mango and passion fruit sauce</span></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Frisches Sorbet – wechselnde hausgemachte Sorten <span class="tag vegan">Vegan</span></span><span class="lang-en">Fresh Sorbet – varying homemade choices <span class="tag vegan">Vegan</span></span></span><span class="price-tag">8,00 €</span></li>
+      </ul>
+      <p style="margin-top: 1.5rem; font-family: var(--font-cond); font-size: 0.95rem; opacity: 0.6;" data-i18n>
+        <span class="lang-de">Café &amp; Digestif? Bitte fragen Sie unseren Service.</span>
+        <span class="lang-en">Café &amp; Digestif? Please ask our service.</span>
+      </p>
+    </div>
+  </article>
+
+</main>
+
+<!-- ============================================================
+     GETRÄNKE
+     ============================================================ -->
+<section class="drink-content" aria-label="Getränke">
+
+  <!-- =========== GETRÄNKEKARTE =========== -->
+  <article class="drink-panel" data-panel="getraenke">
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Champagner-Cocktails</span><span class="lang-en">Champagne Cocktails</span></h3>
+      <ul>
+        <li><span class="dish">Shades of Violet <small>Anchan-Sake, Cassis, Lavendel, Zitrone, Minze, Champagner</small></span><span class="price-tag">18,00 €</span></li>
+        <li><span class="dish">The G-Spot <small>Holunderblüte, grüne Trauben, Zitrone, Orange Bitters, Champagner</small></span><span class="price-tag">18,00 €</span></li>
+        <li><span class="dish">Nights in Paris <small>Sake, Vermouth Rose, Pfirsich, Himbeere, Zitrone, Champagner</small></span><span class="price-tag">18,00 €</span></li>
+        <li><span class="dish">Orange Blossom Martini <small>Gin, Holunderblüte, Suze, Verjus, Vanille, Aprikosenpüree, Champagner</small></span><span class="price-tag">18,00 €</span></li>
+        <li><span class="dish">Pornstar Martini <small>Belvedere Vodka, Passionsfrucht, Vanille, Zitrone, Champagner</small></span><span class="price-tag">18,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Pre-Dinner Cocktails</span><span class="lang-en">Pre-Dinner Cocktails</span></h3>
+      <ul>
+        <li><span class="dish">House Martini <small>Gin, Sake, Lillet Blanc, Yuzu, Orange Bitters</small></span><span class="price-tag">17,00 €</span></li>
+        <li><span class="dish">Milk-Clarified New York Sour <small>Rye Whiskey, Zitrone, Zucker, trockener Rotwein</small></span><span class="price-tag">18,00 €</span></li>
+        <li><span class="dish">Classic Gimlet <small>Gin oder Vodka, Limecordial, Limette</small></span><span class="price-tag">16,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Medium Cocktails</span><span class="lang-en">Medium Cocktails</span></h3>
+      <ul>
+        <li><span class="dish">Southside Fizz <small>Gin, Zitrone, Zucker, Minze, Sodawasser</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Green Garden Lemonade <small>Gin, Holunderblüte, Gurke, Limette, Minze, Sodawasser</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Velvet Skies <small>Anchan-Gin, Pfirsich, Lavendel, grüne Trauben, Zitrone, Sodawasser</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Bergamot Garibaldi <small>Gin, Bergamotte, Pink Grapefruit, Tonic</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Melons of Japan <small>G Vine, grüne Melone, Limette, Ananas, Eiweiß</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Wind Up Punch <small>Orange-Vodka, Zitronengras, Pink Grapefruit, Minze, Zitrone, Aperol, Charity Red</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Scent of Sage <small>Eukalyptus-Vodka, Salbei, Rosmarin, Zitrone, Tonic</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">The Henchman <small>Rye Whiskey, Suze, Caribbean Pineapple, Zitrone</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Pandan Daiquiri <small>Weißer Rum, Limette, Zucker, Pandan</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Siesta Picante <small>Weißer Rum, Ancho Reyes Verde, Koriander, Salzzitrone, Limette, Tajin</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Paloma <small>100 % Agave Tequila, Pink Grapefruit, Limette, Agavendicksaft, Sodawasser, Meersalz</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">The Grape Gatsby <small>Blanco Tequila, Limette, Yuzu, grüne Trauben</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Mezcalita „Classic or Jalapeno-Style" <small>Mezcal / Jalapeno-Mezcal, frischer Limettensaft, Zuckersirup, schwarzes Rauchsalz</small></span><span class="price-tag">17,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">After-Dinner Cocktails</span><span class="lang-en">After-Dinner Cocktails</span></h3>
+      <ul>
+        <li><span class="dish">Ruby Port Flip <small>Bourbon Whiskey, Cassis, Portwein, Waldfruchtmarmelade, Kokosmilch / Sahne</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Taste of Nirvana <small>Sake, Lillet Blanc, Vanille, Passionsfrucht, Kokosmilch</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Matcha Monkey <small>Weißer Rum, Vanille, Banane, weiße Schokolade, Matcha, Kokosmilch</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Espresso Daiquiri <small>Ron Eminente 3 Años, Kahlua, Espresso, Zimt</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Espresso Martini <small>Vodka, Kahlua, Espresso (auf Wunsch koffeinfrei)</small></span><span class="price-tag">16,00 €</span></li>
+      </ul>
+      <p class="menu-note" data-i18n>
+        <span class="lang-de">Unsere Bartender erfüllen gerne Ihre individuellen Wünsche — ob Sours, Fizzes, Collins oder Martinis. Sprechen Sie uns an.</span>
+        <span class="lang-en">Our bartenders are happy to accommodate your individual preferences — from sours, fizzes and collins to martinis. Just let us know.</span>
+      </p>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Alkoholfreie Cocktails</span><span class="lang-en">Non-Alcoholic Cocktails</span></h3>
+      <ul>
+        <li><span class="dish">Volee Rivera <small>Volee Aperitif Naturel, Lavendel, grüne Trauben, Zitrone, Sodawasser</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Bitterman's Friend <small>San Bitter, Ginger Beer, Zitrone, Zitronengras</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Sumatra Mule <small>Mango, Passionsfrucht, Zitrone, Minze, Ginger Beer</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Geisha's Secret <small>Gin 0 %, Limette, grüner Tee, Zitronengras, Minze</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Mister Green <small>Frischer Gurkensaft, naturtrüber Apfelsaft, Zitrone, Soda</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Crème Rouge <small>Früchtetee, Himbeersirup, Kokosmilch, Cranberries</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Cilantro Cooler <small>Tanqueray 0,0 %, Yuzu, Koriander, Limette, Sodawasser</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Virgin Espresso Martini <small>Coldbrew Cordial, Vanille, Espresso (auf Wunsch koffeinfrei)</small></span><span class="price-tag">11,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Aperitivi &amp; Spritz</span><span class="lang-en">Aperitivi &amp; Spritz</span></h3>
+      <ul>
+        <li><span class="dish">Laurent-Perrier La Cuvée Brut <small>Champagner, 0,1 L</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Junmai Masumi, Origami <small>Pet-Nat Sparkling Sake, 0,1 L</small></span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Le Grand Saumur Brut <small>Cremant, Chapin &amp; Landais, 0,1 L</small></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Brut Rosé <small>Cremant, Chapin &amp; Landais, 0,1 L</small></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Prosecco Aperol <small>mit frischer Minze, 0,1 L</small></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Aperol Spritz <small>Prosecco, Aperol, Sodawasser, Orange, Minze</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Yuzu Spritz <small>Prosecco, Yuzu, Sodawasser, Orange, Minze</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Hugo <small>Prosecco, Holundersirup, Minze, Limette</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Kir <small>Weißwein, Crème de Cassis</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Chandon Garden Spritz <small>Moët &amp; Chandon, Argentinien</small></span><span class="price-tag">12,00 €</span></li>
+      </ul>
+      <p class="menu-note" data-i18n>
+        <span class="lang-de">Alle Longdrinks servieren wir mit Limonaden von Thomas Henry oder einem Softdrink Ihrer Wahl.</span>
+        <span class="lang-en">All long drinks are served with Thomas Henry mixers or a soft drink of your choice.</span>
+      </p>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Longdrinks &amp; Highballs</span><span class="lang-en">Long Drinks &amp; Highballs</span></h3>
+      <h4 data-i18n><span class="lang-de">Vodka Longdrinks</span><span class="lang-en">Vodka Long Drinks</span></h4>
+      <ul>
+        <li><span class="dish">Finlandia, Finland + favorite Filler</span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Grey Goose, France + favorite Filler</span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Belvedere, Poland + favorite Filler</span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Beluga Noble, Montenegro + favorite Filler</span><span class="price-tag">15,00 €</span></li>
+      </ul>
+      <h4 data-i18n><span class="lang-de">Gin Longdrinks</span><span class="lang-en">Gin Long Drinks</span></h4>
+      <ul>
+        <li><span class="dish">Tanqueray 0,0 % Alcohol Free, London (GB) + filler</span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Monkey 47 Dry, Schwarzwald (D) + filler</span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish">Monkey 47 Sloe, Schwarzwald (D) + filler</span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish">Elephant, Germany + filler</span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish">Roku, Japan + filler</span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Gin Mare, Mediterranean, Spain + filler</span><span class="price-tag">14,00 €</span></li>
+        <li><span class="dish">Tanqueray, London (GB) + filler</span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Tanqueray Ten, London (GB) + filler</span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Hendrick's, Scotland (GB) + filler</span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">G'VINE, France + filler</span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Kyrö, Finland + filler</span><span class="price-tag">14,00 €</span></li>
+      </ul>
+      <h4 data-i18n><span class="lang-de">Classics &amp; Highballs</span><span class="lang-en">Classics &amp; Highballs</span></h4>
+      <ul>
+        <li><span class="dish">Aperol + favorite Filler</span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Campari + favorite Filler</span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Bourbon Highball <small>Woodford Reserve + filler</small></span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Horses' Neck <small>Woodford Reserve, Angostura, Ginger Ale, Orange Peel</small></span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Cuba Libre <small>Ron Eminente Ambar Claro 3 J., Cola, Limette</small></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Cubata <small>Ron Eminente Reserva 7 J., Cola, Limette</small></span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Dark 'n' Stormy <small>Gosling's Bermuda Rum, Ginger Beer, Limette</small></span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Shanghai Mule <small>Sake, Ginger Beer, Gurke, Limette</small></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Mezcal Mule <small>Mezcal, Ginger Beer, Minze, Limette</small></span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Skinny B…. <small>Finlandia Vodka, Limette, Sodawasser</small></span><span class="price-tag">12,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Spirituosen pur</span><span class="lang-en">Spirits Neat</span></h3>
+      <h4>Vodka <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Finlandia, Finland</span><span class="price-tag">5,00 €</span></li>
+        <li><span class="dish">Grey Goose, France</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Belvedere, Poland</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Beluga Noble, Montenegro</span><span class="price-tag">7,00 €</span></li>
+      </ul>
+      <h4>Gin <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Monkey 47 Dry, Schwarzwald (D)</span><span class="price-tag">6,50 €</span></li>
+        <li><span class="dish">Monkey 47 Sloe, Schwarzwald (D)</span><span class="price-tag">6,50 €</span></li>
+        <li><span class="dish">Elephant London Dry, Germany</span><span class="price-tag">6,50 €</span></li>
+        <li><span class="dish">Roku, Japan</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Gin Mare, Mediterranean, Spain</span><span class="price-tag">6,50 €</span></li>
+        <li><span class="dish">Tanqueray London Dry (GB)</span><span class="price-tag">5,50 €</span></li>
+        <li><span class="dish">Tanqueray Ten Premium (GB)</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Hendrick's Small Batch, Scotland (GB)</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">G'VINE Floraison, France</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Kyrö Finnish Gin</span><span class="price-tag">7,00 €</span></li>
+      </ul>
+      <h4>Rum <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Eminente Ambar Claro 3 Y, Cuba</span><span class="price-tag">5,50 €</span></li>
+        <li><span class="dish">Eminente Reserva 7 Y, Cuba</span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Gosling's Bermuda Rum</span><span class="price-tag">5,00 €</span></li>
+        <li><span class="dish">Ron Botucal Blanco, Venezuela</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Ron Botucal Reserva Exclusiva 12 Y</span><span class="price-tag">7,50 €</span></li>
+        <li><span class="dish">Ron Zacapa Solera Gran Reserva 23 Y</span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Gold of Mauritius, Heritage Selection</span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Appleton Estate 12 Y, Jamaica</span><span class="price-tag">7,50 €</span></li>
+        <li><span class="dish">Discarded Banana Peel, Spiced Rum (GB)</span><span class="price-tag">5,50 €</span></li>
+      </ul>
+      <h4>Vermouth · Sherry · Portwein</h4>
+      <ul>
+        <li><span class="dish">Dolin Vermouth dry / blanc / rouge <small>5 cl</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Antica Formula Vermouth Rosso <small>5 cl</small></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Lillet Blanc / Rosé <small>5 cl</small></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Graham's Six Grapes Reserve Port <small>5 cl</small></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Lustau Manzanilla Papirusa, Dry <small>5 cl</small></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Lustau Amontillado Los Arcos, Medium <small>5 cl</small></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Lustau Pedro Ximénez St Emilio, Sweet <small>5 cl</small></span><span class="price-tag">8,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3>Sake</h3>
+      <ul>
+        <li><span class="dish">Sparkling Junmai Masumi „Origami" Pet-Nat <small>Brauerei Miyasaka, Nagano</small></span><span class="price-tag"><span class="pt-line">Glas 0,1 L · 16,00 €</span><span class="pt-line">Flasche 0,75 L · 125,00 €</span></span></li>
+        <li><span class="dish">Karakuchi Gold Futsushu <small>Brauerei Masumi, Nagano</small></span><span class="price-tag"><span class="pt-line">0,12 L · 14,00 €</span><span class="pt-line">0,3 L · 33,00 €</span><span class="pt-line">0,72 L · 82,00 €</span><span class="pt-line">MG 1,8 L · 177,00 €</span></span></li>
+        <li><span class="dish">Natural Water Brewing <small>Imayotsukasa, Niigata</small></span><span class="price-tag"><span class="pt-line">0,12 L · 14,00 €</span><span class="pt-line">0,3 L · 33,00 €</span><span class="pt-line">0,72 L · 82,00 €</span><span class="pt-line">MG 1,8 L · 177,00 €</span></span></li>
+        <li><span class="dish">Daiginjo Gekkeikan <small>Brauerei Gekkeikan, Kyoto</small></span><span class="price-tag"><span class="pt-line">0,12 L · 15,00 €</span><span class="pt-line">0,72 L · 87,00 €</span></span></li>
+        <li><span class="dish">Toji No Banshaku Honjozo <small>Br. Yoshinogawa, Niigata</small></span><span class="price-tag">0,72 L · 85,00 €</span></li>
+        <li><span class="dish">Black Imayotsukasa Super Dry Junmai <small>Imayotsukasa, Niigata</small></span><span class="price-tag"><span class="pt-line">0,18 L · 29,00 €</span><span class="pt-line">0,72 L · 111,00 €</span><span class="pt-line">MG 1,8 L · 199,00 €</span></span></li>
+        <li><span class="dish">Uijin J. Higebun Junmai Yamahai <small>Br. Furuhashi, Shimane</small></span><span class="price-tag">0,72 L · 87,00 €</span></li>
+        <li><span class="dish">Yuho Yamaoroshi „Umami" <small>Br. Mioya, Ishikawa</small></span><span class="price-tag">0,72 L · 99,00 €</span></li>
+        <li><span class="dish">Ginjo Gokujo <small>Br. Yoshinogawa, Niigata</small></span><span class="price-tag"><span class="pt-line">0,3 L · 39,00 €</span><span class="pt-line">0,72 L · 89,00 €</span><span class="pt-line">MG 1,8 L · 179,00 €</span></span></li>
+        <li><span class="dish">„Rock and Good" <small>Br. Chiyonosono, Kumamoto</small></span><span class="price-tag">Dose 0,72 L · 85,00 €</span></li>
+        <li><span class="dish">Jozen Mizunogotoshi „Pink Jozen" Junmai Ginjo <small>Br. Shirataki, Niigata</small></span><span class="price-tag"><span class="pt-line">0,3 L · 39,00 €</span><span class="pt-line">0,72 L · 89,00 €</span></span></li>
+        <li><span class="dish">Sanka „Bergblume" Junmai Daiginjo <small>Br. Masumi, Nagano</small></span><span class="price-tag"><span class="pt-line">0,3 L · 62,00 €</span><span class="pt-line">0,72 L · 149,00 €</span></span></li>
+        <li><span class="dish">Kenbishi Mizuho Vintage Sake <small>Br. Kenbishi, Hyogo</small></span><span class="price-tag">0,72 L · 111,00 €</span></li>
+        <li><span class="dish">Shirayuki Edo Genroku <small>Br. Konishi, Hyogo</small></span><span class="price-tag">0,72 L · 131,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Asiatische Destillate</span><span class="lang-en">Asian Spirits</span></h3>
+      <h4>Baijiu (China) <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Bamboo Green</span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Blue Flower</span><span class="price-tag">10,00 €</span></li>
+      </ul>
+      <h4>Shochu (Japan) <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Tokiwa Kome</span><span class="price-tag">5,50 €</span></li>
+        <li><span class="dish">Jun Kasutori <small>Shochu aus Sake-Trester</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Kuro Kirishima <small>„Schwarze Nebelinsel"</small></span><span class="price-tag">10,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3>Whisky</h3>
+      <h4>Japanese Whisky <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Nikka from the Barrel, Blended 51,4 %</span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Nikka Miyagikyo, Single Malt</span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Suntory Yamazaki, Malt 12 Y</span><span class="price-tag">15,00 €</span></li>
+      </ul>
+      <h4>Irish · Scotch Blended</h4>
+      <ul>
+        <li><span class="dish">Jameson <small>4 cl</small></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish">Johnnie Walker Black Label <small>2 cl</small></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Black Bottle <small>2 cl</small></span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Monkey Shoulder, Blended Malt <small>2 cl</small></span><span class="price-tag">8,00 €</span></li>
+      </ul>
+      <h4>Scotch Single Malt <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Auchentoshan „Three Wood", Lowland</span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Dalmore 15 Y, Highland</span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish">Oban 14 Y, Highland</span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Lagavulin 16 Y, Islay</span><span class="price-tag">8,00 €</span></li>
+        <li><span class="dish">Ardbeg „Uigeadail", Islay</span><span class="price-tag">8,00 €</span></li>
+      </ul>
+      <h4>Bourbon · Rye <small style="font-weight:400;opacity:.6;">2 cl</small></h4>
+      <ul>
+        <li><span class="dish">Woodford Reserve</span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Basil Hayden's</span><span class="price-tag">8,50 €</span></li>
+        <li><span class="dish">1776 Straight Rye</span><span class="price-tag">8,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Cognac · Tequila · Grappa · Liköre</span><span class="lang-en">Cognac · Tequila · Grappa · Liqueurs</span></h3>
+      <h4>Cognac &amp; Brandy</h4>
+      <ul>
+        <li><span class="dish">Hennessy Privilège <small>4 cl</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Hennessy XO <small>2 cl</small></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Gran Duque D'Alba <small>4 cl</small></span><span class="price-tag">10,00 €</span></li>
+      </ul>
+      <h4>Tequila &amp; Mezcal</h4>
+      <ul>
+        <li><span class="dish">Volcán Blanco / Reposado <small>4 cl</small></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Volcán Cristalino <small>2 cl</small></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Don Julio Añejo <small>2 cl</small></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Mezcal Campo del Rey <small>2 cl</small></span><span class="price-tag">7,00 €</span></li>
+      </ul>
+      <h4>Grappa &amp; Obstler</h4>
+      <ul>
+        <li><span class="dish">Nonino Chardonnay Grappa Barrique <small>4 cl</small></span><span class="price-tag">11,00 €</span></li>
+        <li><span class="dish">Williamsbirne Barrique <small>4 cl</small></span><span class="price-tag">13,00 €</span></li>
+        <li><span class="dish">Haselnuss Scheibel Barrique <small>2 cl</small></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish">Ziegler Obstbrand Apfel, Birne &amp; Steinfrüchte <small>4 cl</small></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Ziegler Williamsbrand <small>2 cl</small></span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Ziegler Waldhimbeergeist <small>2 cl</small></span><span class="price-tag">9,00 €</span></li>
+        <li><span class="dish">Ziegler Sauerkirsch <small>2 cl</small></span><span class="price-tag">12,00 €</span></li>
+        <li><span class="dish">Ziegler Alte Zwetschge <small>2 cl</small></span><span class="price-tag">10,00 €</span></li>
+      </ul>
+      <h4 data-i18n><span class="lang-de">Liköre &amp; Bitters</span><span class="lang-en">Liqueurs &amp; Bitters</span></h4>
+      <ul>
+        <li><span class="dish">Mei Jian, grüner Pflaumenwein <small>4 cl</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Frangelico <small>4 cl</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Limoncello <small>4 cl</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Baileys <small>4 cl</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Amaretto Disaronno <small>4 cl</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Sambuca Molinari <small>4 cl</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Viriana China China <small>2 cl</small></span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Borgmann <small>2 cl</small></span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Yuzu <small>2 cl</small></span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">Aperol <small>4 cl</small></span><span class="price-tag">8,50 €</span></li>
+        <li><span class="dish">Campari <small>4 cl</small></span><span class="price-tag">8,50 €</span></li>
+        <li><span class="dish">Fernet Branca <small>4 cl</small></span><span class="price-tag">8,50 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Bier</span><span class="lang-en">Beer</span></h3>
+      <ul>
+        <li><span class="dish">Astra vom Fass <small>0,30 L</small></span><span class="price-tag">5,50 €</span></li>
+        <li><span class="dish">Astra Pitcher <small>1,50 L</small></span><span class="price-tag">24,00 €</span></li>
+        <li><span class="dish">Tiger vom Fass <small>0,30 L</small></span><span class="price-tag">5,50 €</span></li>
+        <li><span class="dish">Tiger Pitcher <small>1,50 L</small></span><span class="price-tag">24,00 €</span></li>
+        <li><span class="dish">Tsingtao <small>Flasche 0,33 L</small></span><span class="price-tag">5,50 €</span></li>
+        <li><span class="dish">Krombacher Alkoholfrei <small>Flasche 0,33 L</small></span><span class="price-tag">4,90 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Kaffee · Tee · Softdrinks</span><span class="lang-en">Coffee · Tea · Soft Drinks</span></h3>
+      <h4>Café</h4>
+      <ul>
+        <li><span class="dish">Espresso</span><span class="price-tag">3,00 €</span></li>
+        <li><span class="dish">Doppelter Espresso</span><span class="price-tag">4,50 €</span></li>
+        <li><span class="dish">Espresso Macchiato</span><span class="price-tag">3,30 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Tasse Kaffee</span><span class="lang-en">Cup of coffee</span></span><span class="price-tag">3,50 €</span></li>
+      </ul>
+      <h4>Tee</h4>
+      <ul>
+        <li><span class="dish" data-i18n><span class="lang-de">Frischer Ingwertee oder Pfefferminztee + Honig <small>0,4 L</small></span><span class="lang-en">Fresh ginger or peppermint tea + honey <small>0.4 L</small></span></span><span class="price-tag">5,50 €</span></li>
+      </ul>
+      <h4>Softdrinks</h4>
+      <ul>
+        <li><span class="dish">Charitea (bio, 100 % Fairtrade) <small>grün, rot, schwarz, mate · 0,33 L</small></span><span class="price-tag">4,90 €</span></li>
+        <li><span class="dish">Lemonaid <small>Lemon, Maracuja, Blutorange · 0,33 L</small></span><span class="price-tag">4,90 €</span></li>
+        <li><span class="dish">Vöslauer still / prickelnd <small>0,2 L</small></span><span class="price-tag">3,00 €</span></li>
+        <li><span class="dish">Vöslauer still / prickelnd <small>0,75 L</small></span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">Coca Cola / Light <small>0,2 L</small></span><span class="price-tag">4,00 €</span></li>
+        <li><span class="dish">Thomas Henry Tonic, Lemon, Ginger Ale o. Beer, Mango <small>0,2 L</small></span><span class="price-tag">4,00 €</span></li>
+        <li><span class="dish">San Bitter <small>0,1 L</small></span><span class="price-tag">3,50 €</span></li>
+        <li><span class="dish" data-i18n><span class="lang-de">Apfelschorle <small>0,4 L</small></span><span class="lang-en">Apple spritzer <small>0.4 L</small></span></span><span class="price-tag">5,00 €</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- =========== WEINKARTE =========== -->
+  <article class="drink-panel" data-panel="weinkarte">
+
+    <p class="menu-intro" data-i18n>
+      <span class="lang-de">Eine kuratierte Auswahl von Champagner, offenen Weinen und Flaschenweinen aus Deutschland, Österreich, Frankreich, Italien, Spanien und Übersee.</span>
+      <span class="lang-en">A curated selection of champagne, wines by the glass and bottle from Germany, Austria, France, Italy, Spain and overseas.</span>
+    </p>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Offene Weine</span><span class="lang-en">Wines by the Glass</span></h3>
+      <h4>Champagner &amp; Sparkling <small style="font-weight:400;opacity:.6;">0,1 L</small></h4>
+      <ul>
+        <li><span class="dish">Laurent-Perrier La Cuvée Brut, Champagner</span><span class="price-tag">16,00 €</span></li>
+        <li><span class="dish">Le Grand Saumur Brut, Cremant, Chapin &amp; Landais</span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Brut Rosé, Cremant, Chapin &amp; Landais</span><span class="price-tag">10,00 €</span></li>
+        <li><span class="dish">Chandon Garden Spritz, Moët &amp; Chandon, Argentinien</span><span class="price-tag">12,00 €</span></li>
+      </ul>
+      <h4 data-i18n><span class="lang-de">Weißwein</span><span class="lang-en">White</span> <small style="font-weight:400;opacity:.6;">0,1 L</small></h4>
+      <ul>
+        <li><span class="dish">2023 Grauschiefer Riesling, halbtrocken, Rauen, Mosel (D)</span><span class="price-tag">6,30 €</span></li>
+        <li><span class="dish">2023 Grauburgunder, Salwey, trocken, Kaiserstuhl (D)</span><span class="price-tag">5,90 €</span></li>
+        <li><span class="dish">2024 Grüner Veltliner, trocken, Eschenhof Holzer, Wagram (Ö)</span><span class="price-tag">6,30 €</span></li>
+        <li><span class="dish">2024 Sauvignon-Viognier Micro-Cosme, Chât. Saint Cosme, Rhône (F)</span><span class="price-tag">6,30 €</span></li>
+        <li><span class="dish">2023 Gewürztraminer Reserve, Gustave Lorentz, Alsace bio (F)</span><span class="price-tag">7,00 €</span></li>
+        <li><span class="dish">2024 Grillo, Altavilla della Corte, Sicilia (I)</span><span class="price-tag">5,90 €</span></li>
+      </ul>
+      <h4 data-i18n><span class="lang-de">Rotwein</span><span class="lang-en">Red</span> <small style="font-weight:400;opacity:.6;">0,1 L</small></h4>
+      <ul>
+        <li><span class="dish">2021 Merlot Excelsior, Robertson (ZA)</span><span class="price-tag">6,00 €</span></li>
+        <li><span class="dish">2023 Blauer Spätburgunder Alte Reben, Heinemann, Baden (D)</span><span class="price-tag">6,30 €</span></li>
+        <li><span class="dish">2025 Pinot-Grenache Micro-Cosme, Chât. Saint Cosme, Rhône (F)</span><span class="price-tag">6,30 €</span></li>
+        <li><span class="dish">2022 Zinfandel Gnarly Head, Old Vine, Californien (USA)</span><span class="price-tag">6,90 €</span></li>
+      </ul>
+      <h4>Rosé <small style="font-weight:400;opacity:.6;">0,1 L</small></h4>
+      <ul>
+        <li><span class="dish">2023 Brume, Côtes de Gascogne (F)</span><span class="price-tag">6,10 €</span></li>
+        <li><span class="dish">2024 Jedentag Rosé, Franz Keller, Baden (D)</span><span class="price-tag">5,90 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3>Champagner &amp; Sekt</h3>
+      <ul>
+        <li><span class="dish">Laurent-Perrier La Cuvée Brut</span><span class="price-tag"><span class="pt-line">0,75 L · 99,00 €</span><span class="pt-line">Magnum 1,5 L · 197,00 €</span></span></li>
+        <li><span class="dish">De Venoge Brut</span><span class="price-tag">0,375 L · 55,00 €</span></li>
+        <li><span class="dish">Jacquesson Extra Brut</span><span class="price-tag"><span class="pt-line">0,75 L · 175,00 €</span><span class="pt-line">Magnum 1,5 L · 350,00 €</span></span></li>
+        <li><span class="dish">Bollinger Special Cuvée Brut</span><span class="price-tag"><span class="pt-line">0,375 L · 89,00 €</span><span class="pt-line">0,75 L · 170,00 €</span><span class="pt-line">Magnum 1,5 L · 340,00 €</span></span></li>
+        <li><span class="dish">Bollinger Rosé</span><span class="price-tag"><span class="pt-line">0,75 L · 185,00 €</span><span class="pt-line">Magnum 1,5 L · 360,00 €</span></span></li>
+        <li><span class="dish">Ruinart R de Ruinart Brut <small>0,75 L</small></span><span class="price-tag">175,00 €</span></li>
+        <li><span class="dish">Ruinart Blanc de Blancs <small>0,75 L</small></span><span class="price-tag">195,00 €</span></li>
+        <li><span class="dish">Ruinart Rosé <small>0,75 L</small></span><span class="price-tag">195,00 €</span></li>
+        <li><span class="dish">Dom Pérignon Vintage 2012 <small>0,75 L</small></span><span class="price-tag">475,00 €</span></li>
+        <li><span class="dish">Krug Grande Cuvée <small>0,75 L</small></span><span class="price-tag">495,00 €</span></li>
+        <li><span class="dish">Franz Keller „Petit Adler Brut", Sekt <small>0,75 L</small></span><span class="price-tag">49,00 €</span></li>
+      </ul>
+      <h4>Cremant</h4>
+      <ul>
+        <li><span class="dish">Le Grand Saumur Brut, Chapin &amp; Landais</span><span class="price-tag"><span class="pt-line">0,75 L · 59,00 €</span><span class="pt-line">Magnum 1,5 L · 109,00 €</span></span></li>
+        <li><span class="dish">Brut Rosé, Chapin &amp; Landais <small>0,75 L</small></span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">Chandon Garden Spritz, Moët &amp; Chandon <small>0,75 L</small></span><span class="price-tag">75,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Weißwein Deutschland</span><span class="lang-en">White – Germany</span> <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <h4>Rheingau · Weingut Künstler</h4>
+      <ul>
+        <li><span class="dish">2024 Riesling Estate, halbtrocken</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2024 Riesling Hölle, trocken</span><span class="price-tag">55,00 €</span></li>
+        <li><span class="dish">2024 Riesling Alte Reben Stielweg, erste Lage</span><span class="price-tag">69,00 €</span></li>
+        <li><span class="dish">2023 Riesling Kirchenstück, Großes Gewächs</span><span class="price-tag">99,00 €</span></li>
+      </ul>
+      <h4>Mosel</h4>
+      <ul>
+        <li><span class="dish">2024 Elbling Nittel, Frieden-Berg</span><span class="price-tag">35,00 €</span></li>
+        <li><span class="dish">2025 Auxerrois, Frieden-Berg</span><span class="price-tag">35,00 €</span></li>
+        <li><span class="dish">2024 Riesling vom Schiefer „Ansgar", Clüsserath</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2023 Riesling Haus Klosterberg, Markus Molitor</span><span class="price-tag">37,00 €</span></li>
+        <li><span class="dish">2023 Pinot Blanc Haus Klosterberg, Markus Molitor</span><span class="price-tag">37,00 €</span></li>
+      </ul>
+      <h4>Rheinhessen · Nahe</h4>
+      <ul>
+        <li><span class="dish">2023 Chardonnay Halbstück, Wagner Stempel</span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2024 Grauburgunder, Katharina Wechsler</span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2024 Riesling unplugged, Tesch</span><span class="price-tag">38,00 €</span></li>
+        <li><span class="dish">2023 Riesling Remigiusberg, Tesch</span><span class="price-tag">49,00 €</span></li>
+        <li><span class="dish">2024 Riesling „Alter Wingert", Hahnmühle bio</span><span class="price-tag">38,00 €</span></li>
+        <li><span class="dish">2023 Riesling &amp; Roter Traminer, Hahnmühle bio</span><span class="price-tag">49,00 €</span></li>
+        <li><span class="dish">2023 „Steingewann" Weißburgunder, Hees</span><span class="price-tag">38,00 €</span></li>
+      </ul>
+      <h4>Franken · Pfalz · Baden</h4>
+      <ul>
+        <li><span class="dish">2024 Himmelstoß Blauer Silvaner, Glaser</span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2024 Julius-Echter-Berg Silvaner, Hans Wirsching</span><span class="price-tag">55,00 €</span></li>
+        <li><span class="dish">2024 Volkach Grüner Silvaner, May Müller</span><span class="price-tag">37,00 €</span></li>
+        <li><span class="dish">2024 Scheurebe, Hans Wirsching</span><span class="price-tag">37,00 €</span></li>
+        <li><span class="dish">2024 Alter Satz, Eymann bio</span><span class="price-tag">35,00 €</span></li>
+        <li><span class="dish">2024 Riesling vom Buntsandstein, Andres bio</span><span class="price-tag">34,00 €</span></li>
+        <li><span class="dish">2023 Riesling Sonnentropfen, Karl Schäfer</span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2022 Grauburgunder „Fuchsteufelgrau", Karl Schäfer</span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2024 Sauvignon Blanc, Bassermann Jordan</span><span class="price-tag">43,00 €</span></li>
+        <li><span class="dish">2024 Grauburgunder vom Löss, Franz Keller</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2024 Weißburgunder vom Löss, Franz Keller</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2023 Chardonnay Oberbergener Bassgeige, Franz Keller</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2023 Grauburgunder Oberbergener Bassgeige, Franz Keller</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2022 Grauburgunder Oberbergener Bassgeige, F. Keller <small>0,375 L</small></span><span class="price-tag">33,00 €</span></li>
+        <li><span class="dish">2022 Weißburgunder Oberbergener Bassgeige, F. Keller</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2022 Grauburgunder Kähner GG, Franz Keller</span><span class="price-tag">87,00 €</span></li>
+        <li><span class="dish">2022 Müller Thurgau vom Löss, Franz Keller</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2024 Muskateller Kabinett, Heinemann</span><span class="price-tag">49,00 €</span></li>
+        <li><span class="dish">2023 Chardonnay Alte Reben Kabinett, Heinemann</span><span class="price-tag">55,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Weißwein International</span><span class="lang-en">White – International</span> <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <h4>Österreich · Spanien</h4>
+      <ul>
+        <li><span class="dish">2023 Grüner Veltliner Alte Setzen, Huber, Kamptal (Ö)</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2024 Grüner Veltliner, Ingrid Groiss, Weinviertel bio (Ö)</span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2025 „Anna's 17" Gemischter Satz, Ingrid Groiss bio (Ö)</span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2023 Tianna Bocchoris Blanc, Tianna Negre, Mallorca (E)</span><span class="price-tag">57,00 €</span></li>
+        <li><span class="dish">2021 Don Quintin Ortega Blanc, Bodegas Ortega Ezquerro, Rioja (E)</span><span class="price-tag">45,00 €</span></li>
+      </ul>
+      <h4>Frankreich</h4>
+      <ul>
+        <li><span class="dish">2024 Sauvignon „Le Bouc", Vincent Ricard, Loire</span><span class="price-tag"><span class="pt-line">0,75 L · 43,00 €</span><span class="pt-line">Magnum 1,5 L · 85,00 €</span></span></li>
+        <li><span class="dish">2023 Sancerre „Authentique", Thomas-Labaille, Loire</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2021 Sancerre „Chavignol", Gérard Boulay, Loire <small>0,375 L</small></span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2022 Muscadet de Sèvre et Maine, Dom. de L'Écu, Loire</span><span class="price-tag">43,00 €</span></li>
+        <li><span class="dish">2023 Pouilly Fumé, Jonathan Pabio, Loire</span><span class="price-tag"><span class="pt-line">0,375 L · 45,00 €</span><span class="pt-line">0,75 L · 74,00 €</span><span class="pt-line">Magnum 1,5 L · 145,00 €</span></span></li>
+        <li><span class="dish">2023 Chenin Blanc „Les Clos de Beauce", Bonnigal-Bodet</span><span class="price-tag">69,00 €</span></li>
+        <li><span class="dish">2024 Chardonnay, Château Pesquié, Rhône</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2022 Crozes Hermitage, Yann Chave, Rhône</span><span class="price-tag">89,00 €</span></li>
+        <li><span class="dish">2024 Sauvignon-Viognier Micro-Cosme, Chât. Saint Cosme, Rhône</span><span class="price-tag">43,00 €</span></li>
+        <li><span class="dish">2022 Bourgogne Chardonnay, Domaine Alex Moreau</span><span class="price-tag">99,00 €</span></li>
+        <li><span class="dish">2022 Chablis „Les Grand Terroirs", Samuel Billaud</span><span class="price-tag"><span class="pt-line">0,375 L · 75,00 €</span><span class="pt-line">0,75 L · 85,00 €</span></span></li>
+        <li><span class="dish">2021 Chablis 1er Cru „Les Fourneaux", Samuel Billaud</span><span class="price-tag">150,00 €</span></li>
+        <li><span class="dish">2023 Chablis 1er Cru „Beauroy", Agnès et Didier Dauvissat</span><span class="price-tag">85,00 €</span></li>
+        <li><span class="dish">2019 Montagny „Théophanie", Charton-Vachet <small>Magnum 1,5 L</small></span><span class="price-tag">145,00 €</span></li>
+        <li><span class="dish">2024 Château Peyrat Blanc, Graves, Bordeaux</span><span class="price-tag">43,00 €</span></li>
+        <li><span class="dish">2020 LaLaLandes, Domaine Laballe, Sud-Ouest</span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2023 Gewürztraminer Reserve, Gustave Lorentz, Alsace bio</span><span class="price-tag">50,00 €</span></li>
+        <li><span class="dish">2015 Grenat Vin Doux Naturel, Trapadis <small>0,375 L · Dessertwein</small></span><span class="price-tag">49,00 €</span></li>
+      </ul>
+      <h4>Italien</h4>
+      <ul>
+        <li><span class="dish">2024 Pinot Grigio, Alois Lageder, Südtirol</span><span class="price-tag">47,00 €</span></li>
+        <li><span class="dish">2024 Chardonnay, Alois Lageder, Südtirol</span><span class="price-tag">47,00 €</span></li>
+        <li><span class="dish">2024 Sauvignon Blanc „Urgestein" IGT, Baron Longo, Südtirol</span><span class="price-tag">69,00 €</span></li>
+        <li><span class="dish">2023 Gavi dei Gavi „Etichetta Nera", La Scolca, Piemonte</span><span class="price-tag"><span class="pt-line">0,75 L · 90,00 €</span><span class="pt-line">Magnum 1,5 L · 180,00 €</span></span></li>
+        <li><span class="dish">2023 Gavi del Comune di Gavi, Bersano, Piemonte</span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2024 Langhe Arneis, Cordero di Montezemolo</span><span class="price-tag">51,00 €</span></li>
+        <li><span class="dish">2022 Gavi, Pio Cesare, Alba</span><span class="price-tag">49,00 €</span></li>
+        <li><span class="dish">2024 Bianchetto Sauvignon, Sacchetto, Venetien</span><span class="price-tag">29,00 €</span></li>
+        <li><span class="dish">2024 Lugana Zeni, Ca' di Fratelli, Venetien</span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2024 Pinot Grigio, Silvio Jermann, Friaul</span><span class="price-tag">79,00 €</span></li>
+        <li><span class="dish">2022 Collio Friulano, Russiz Superiore, Friaul</span><span class="price-tag">75,00 €</span></li>
+        <li><span class="dish">2024 Vermentino Bolgheri, Antinori-Guado al Tasso, Toscana</span><span class="price-tag">57,00 €</span></li>
+        <li><span class="dish">2024 Chardonnay Bramito, Antinori-Castello della Sala, Umbrien</span><span class="price-tag">63,00 €</span></li>
+        <li><span class="dish">2022 Trebbiano d'Abruzzo, Masciarelli</span><span class="price-tag">29,00 €</span></li>
+        <li><span class="dish">2022 Chardonnay „Marina Cvetic", Masciarelli, Abruzzen</span><span class="price-tag">109,00 €</span></li>
+        <li><span class="dish">2023 Pietra Bianca, Castel del Monte, Tormaresca, Apulien</span><span class="price-tag">75,00 €</span></li>
+        <li><span class="dish">2022 Cavanera Etna Bianco, Firriato, Sizilien</span><span class="price-tag">64,00 €</span></li>
+        <li><span class="dish">2024 Grillo, Altavilla della Corte, Sicilia</span><span class="price-tag">39,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3>Rosé <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <ul>
+        <li><span class="dish">2024 Jedentag Rosé, Franz Keller, Baden (D)</span><span class="price-tag"><span class="pt-line">0,75 L · 36,00 €</span><span class="pt-line">Magnum 1,5 L · 70,00 €</span></span></li>
+        <li><span class="dish">2023 Pinot Noir Rosé, Balthasar Ress, Rheingau (D)</span><span class="price-tag">33,00 €</span></li>
+        <li><span class="dish">2024 Cuvée Rosé „Clarette", Knipser, Pfalz (D)</span><span class="price-tag"><span class="pt-line">0,75 L · 49,00 €</span><span class="pt-line">Magnum 1,5 L · 99,00 €</span></span></li>
+        <li><span class="dish">2023 Sancerre Rosé „Sibylle", Gérard Boulay, Sancerre (F)</span><span class="price-tag">69,00 €</span></li>
+        <li><span class="dish">2024 Miraval, Jolie-Pitt &amp; Perrin, Côtes de Provence (F)</span><span class="price-tag">69,00 €</span></li>
+        <li><span class="dish">2021 Studio Miraval, Jolie-Pitt &amp; Perrin <small>Magnum 1,5 L</small></span><span class="price-tag">139,00 €</span></li>
+        <li><span class="dish">2022 Menetou-Salon Rosé, Philippe Gilbert, Loire (F)</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2023 Brume Rosé, Côtes de Gascogne, Domaine Labelle (F)</span><span class="price-tag">35,00 €</span></li>
+        <li><span class="dish">2024 Côtes du Ventoux „Les Terrasses" Rosé, Pesquié, Rhône (F)</span><span class="price-tag"><span class="pt-line">0,75 L · 39,00 €</span><span class="pt-line">Magnum 1,5 L · 79,00 €</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Rotwein Deutschland &amp; Österreich</span><span class="lang-en">Red – Germany &amp; Austria</span> <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <ul>
+        <li><span class="dish">2022 Spätburgunder „Tradition", Künstler, Rheingau (D)</span><span class="price-tag">49,00 €</span></li>
+        <li><span class="dish">2022 Pinot Noir Haus Klosterberg, Markus Molitor, Mosel (D)</span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2020 Pinot Noir Mandelgraben, Markus Molitor, Mosel (D)</span><span class="price-tag">73,00 €</span></li>
+        <li><span class="dish">2022 Spätburgunder vom Löss, Franz Keller, Baden (D)</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2023 Spätburgunder Oberbergener Bassgeige, Franz Keller (D)</span><span class="price-tag">85,00 €</span></li>
+        <li><span class="dish">2022 Isteiner Cabernet Sauvignon, am Klotz, Baden (D)</span><span class="price-tag">79,00 €</span></li>
+        <li><span class="dish">2023 Blauer Spätburgunder Alte Reben, Heinemann (D)</span><span class="price-tag">42,00 €</span></li>
+        <li><span class="dish">2021 Scherzinger Spätburgunder Barrique, Heinemann (D)</span><span class="price-tag">62,00 €</span></li>
+        <li><span class="dish">2018 Cuvée X, Knipser, Pfalz (D)</span><span class="price-tag">149,00 €</span></li>
+        <li><span class="dish">2021/22 Incognito Cuvée, Philipp Kuhn, Pfalz (D)</span><span class="price-tag">42,00 €</span></li>
+        <li><span class="dish">2021 Wildwux Cuvée, Braunstein, Burgenland bio (Ö)</span><span class="price-tag">57,00 €</span></li>
+        <li><span class="dish">2013 Blaufränkisch Kristallin &amp; Kalk, Triebaumer <small>Magnum 1,5 L</small></span><span class="price-tag">199,00 €</span></li>
+        <li><span class="dish">2020 Rotes Handgemenge Cuvée, Wachter-Wiesler (Ö)</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2019 Muschelkalk Rot Cuvée, Lichtenberger-Gonzalez (Ö)</span><span class="price-tag">55,00 €</span></li>
+        <li><span class="dish">2019 Blaufränkisch Eisenberg, Wachter-Wiesler bio (Ö)</span><span class="price-tag">75,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Rotwein International</span><span class="lang-en">Red – International</span> <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <h4>Frankreich</h4>
+      <ul>
+        <li><span class="dish">2025 Pinot-Grenache Micro-Cosume, Chât. Saint Cosme, Rhône</span><span class="price-tag">43,00 €</span></li>
+        <li><span class="dish">2022 Côtes du Rhône „Sélection", Chât. Saint Cosme</span><span class="price-tag"><span class="pt-line">0,75 L · 47,00 €</span><span class="pt-line">Magnum 1,5 L · 94,00 €</span></span></li>
+        <li><span class="dish">2019 Gigondas, Château Saint Cosme</span><span class="price-tag">95,00 €</span></li>
+        <li><span class="dish">2022 Châteauneuf-du-Pape, Dom. La Bastide St-Dom. bio</span><span class="price-tag"><span class="pt-line">0,375 L · 53,00 €</span><span class="pt-line">0,75 L · 95,00 €</span></span></li>
+        <li><span class="dish">2023 Crozes Hermitage, Yann Chave, Rhône</span><span class="price-tag"><span class="pt-line">0,375 L · 53,00 €</span><span class="pt-line">0,75 L · 99,00 €</span></span></li>
+        <li><span class="dish">2019 Volnay, Chantal Lescure, Bourgogne bio <small>0,375 L</small></span><span class="price-tag">99,00 €</span></li>
+        <li><span class="dish">2020 Bandol, Domaine Tempier, Provence</span><span class="price-tag">105,00 €</span></li>
+        <li><span class="dish">2017/18/19 Château Mangot, Saint Émilion Grand Cru</span><span class="price-tag">99,00 €</span></li>
+        <li><span class="dish">2020 Château Le Puy, Côte de France, Bordeaux</span><span class="price-tag">129,00 €</span></li>
+        <li><span class="dish">2014/15 Château de Graviers, Margaux bio</span><span class="price-tag">109,00 €</span></li>
+        <li><span class="dish">2022 Château Champ des Treilles, Grand Vin bio</span><span class="price-tag">65,00 €</span></li>
+        <li><span class="dish">2010 Château Lousteauneuf „Cru Bourgeois" Medoc <small>0,375 L</small></span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2015 Cahors „La Fage", Cosse-Maisonneuve <small>Magnum 1,5 L</small></span><span class="price-tag">149,00 €</span></li>
+      </ul>
+      <h4>Italien</h4>
+      <ul>
+        <li><span class="dish">2019 Amarone della Valpolicella, Santi, Veneto</span><span class="price-tag">85,00 €</span></li>
+        <li><span class="dish">2018 Amarone della Valpolicella Classico, Bolla, Venetien</span><span class="price-tag">99,00 €</span></li>
+        <li><span class="dish">2023 Barbera d'Alba, Vietti, Piemont</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2022 Nebbiolo, Vietti, Piemont</span><span class="price-tag">83,00 €</span></li>
+        <li><span class="dish">2019/20 Barbaresco „Bric Turot", Prunotto, Piemont</span><span class="price-tag">135,00 €</span></li>
+        <li><span class="dish">2021 Barolo Monfalletto, Cordero di Montezemolo bio</span><span class="price-tag">143,00 €</span></li>
+        <li><span class="dish">2021/22 Gries Lagrein, Kellerei-Cantina Terlan, Südtirol</span><span class="price-tag">75,00 €</span></li>
+        <li><span class="dish">2022 Morellino di Scansano, Valdifalco, Toscana bio</span><span class="price-tag">45,00 €</span></li>
+        <li><span class="dish">2021 Mazzapink, Valgiano, Toscana</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2023 Rosso di Montalcino, Villa Poggio Salvi</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2020 Chianti Classico Riserva, Badia a Passignano, Antinori</span><span class="price-tag">135,00 €</span></li>
+        <li><span class="dish">2020 Brunello di Montalcino, Poggio Salvi</span><span class="price-tag">133,00 €</span></li>
+        <li><span class="dish">2020/22 Tignanello, Antinori, Toscana</span><span class="price-tag">299,00 €</span></li>
+        <li><span class="dish">2022/23 „Alta Mora" Etna Rosso Nerello Mascalese, Cusumano</span><span class="price-tag">51,00 €</span></li>
+        <li><span class="dish">2021 Sabbie dell'Etna Rosso, Firriato, Sizilien</span><span class="price-tag">45,00 €</span></li>
+      </ul>
+      <h4>Spanien · Übersee</h4>
+      <ul>
+        <li><span class="dish">2021 Rioja La Montesa Crianza, Palacios Remondo</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2019 Muac, Terra de Falanis, Mallorca</span><span class="price-tag">41,00 €</span></li>
+        <li><span class="dish">2022 Schwarzer Schiefer, Vinicola del Priorat</span><span class="price-tag">57,00 €</span></li>
+        <li><span class="dish">2023 Sauvignon Blanc, Drostdy Hof, Coastal (ZA)</span><span class="price-tag">33,00 €</span></li>
+        <li><span class="dish">2023 Chenin Blanc / Chardonnay, Spier, Western Cape (ZA)</span><span class="price-tag">33,00 €</span></li>
+        <li><span class="dish">2024 Chardonnay Koonunga Hill, Penfolds (AUS)</span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2024 Sauvignon Blanc, Cloudy Bay, Marlborough (NZ)</span><span class="price-tag">99,00 €</span></li>
+        <li><span class="dish">2021 Merlot Excelsior, Robertson (ZA)</span><span class="price-tag">39,00 €</span></li>
+        <li><span class="dish">2021 Cuvée Kaapzicht Bottelary Hills Estate, Stellenbosch (ZA)</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">2020 Pinotage Rooiland, Kaapzicht, Stellenbosch (ZA)</span><span class="price-tag">75,00 €</span></li>
+        <li><span class="dish">2022 Shiraz Allesverloren, Swartland (ZA)</span><span class="price-tag">49,00 €</span></li>
+        <li><span class="dish">2022 Malbec Altos del Playa, Terrazas de los Andes bio (ARG)</span><span class="price-tag">53,00 €</span></li>
+        <li><span class="dish">2022 Zinfandel Old Vine Gnarly Head, Californien (USA)</span><span class="price-tag">46,00 €</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- =========== WEIN-SPECIALS =========== -->
+  <article class="drink-panel" data-panel="wein-specials">
+
+    <p class="menu-intro" data-i18n>
+      <span class="lang-de">Eine Auswahl besonderer Flaschen — Highlights aus unserer Weinkarte, kuratiert für diesen Monat.</span>
+      <span class="lang-en">A selection of special bottles — highlights from our wine list, curated for this month.</span>
+    </p>
+
+    <div class="menu-section">
+      <h3>Champagner</h3>
+      <ul>
+        <li><span class="dish">Laurent-Perrier La Cuvée Brut</span><span class="price-tag"><span class="pt-line">0,75 L · 99,00 €</span><span class="pt-line">Magnum 1,5 L · 197,00 €</span></span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3>Spritz</h3>
+      <ul>
+        <li><span class="dish">Chandon Garden Spritz <small>Moët &amp; Chandon, Argentinien · 0,75 L</small></span><span class="price-tag">69,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3>Rosé <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <ul>
+        <li><span class="dish">2023 Sancerre Rosé „Sibylle", Gérard Boulay, Sancerre (F)</span><span class="price-tag">69,00 €</span></li>
+        <li><span class="dish">2024 Miraval, Jolie-Pitt &amp; Perrin, Côtes de Provence (F)</span><span class="price-tag">69,00 €</span></li>
+        <li><span class="dish">2021 Studio Miraval, Jolie-Pitt &amp; Perrin <small>Magnum 1,5 L</small></span><span class="price-tag">139,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Weißwein</span><span class="lang-en">White</span> <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <ul>
+        <li><span class="dish">2023 Riesling Kirchenstück, Großes Gewächs, Künstler, Rheingau (D)</span><span class="price-tag">99,00 €</span></li>
+        <li><span class="dish">2023 Riesling 3000, Schätzel, Rheinhessen bio (D)</span><span class="price-tag">59,00 €</span></li>
+        <li><span class="dish">Steiner Riesling 17–22, Schätzel, Rheinhessen (D)</span><span class="price-tag">71,00 €</span></li>
+        <li><span class="dish">2022 Grauburgunder Oberbergener Bassgeige, F. Keller (D) <small>0,375 L</small></span><span class="price-tag">33,00 €</span></li>
+        <li><span class="dish">2022 Grauburgunder Kähner GG, Franz Keller, Baden (D)</span><span class="price-tag">87,00 €</span></li>
+        <li><span class="dish">2022 Crozes Hermitage, Yann Chave, Rhône (F)</span><span class="price-tag">89,00 €</span></li>
+        <li><span class="dish">2024 Gavi dei Gavi „Etichetta Nera", La Scolca, Piemonte (I)</span><span class="price-tag">90,00 €</span></li>
+        <li><span class="dish">2023 Gavi dei Gavi „Etichetta Nera", La Scolca <small>Magnum 1,5 L</small></span><span class="price-tag">180,00 €</span></li>
+        <li><span class="dish">2024 Chardonnay, Venezia Giulia, Silvio Jermann, Friuli (I)</span><span class="price-tag">79,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <h3 data-i18n><span class="lang-de">Rotwein</span><span class="lang-en">Red</span> <small style="font-weight:400;opacity:.6;">0,75 L</small></h3>
+      <ul>
+        <li><span class="dish">2023 Spätburgunder Oberbergener Bassgeige, Franz Keller (D)</span><span class="price-tag">85,00 €</span></li>
+        <li><span class="dish">2018 Cuvée X, Knipser, Pfalz (D)</span><span class="price-tag">149,00 €</span></li>
+        <li><span class="dish">2022 Zweigelt Mitterjoch, Birgit Braunstein, Neusiedlersee bio (Ö)</span><span class="price-tag">49,00 €</span></li>
+        <li><span class="dish">2020/22 Tignanello, Antinori, Toscana (I)</span><span class="price-tag">299,00 €</span></li>
+        <li><span class="dish">2018 Amarone della Valpolicella Classico, Bolla (I)</span><span class="price-tag">99,00 €</span></li>
+        <li><span class="dish">2022 Crozes Hermitage, Yann Chave, Rhône (F)</span><span class="price-tag">99,00 €</span></li>
+      </ul>
+    </div>
+
+    <div class="menu-cta">
+      <h4 data-i18n><span class="lang-de">Lust auf eine Empfehlung?</span><span class="lang-en">Looking for a recommendation?</span></h4>
+      <p data-i18n>
+        <span class="lang-de">Unser Service berät Sie gerne zu Weinen und passenden Speisen.</span>
+        <span class="lang-en">Our service team is happy to advise on wines and pairings.</span>
+      </p>
+      <a href="index.html#reservieren" class="btn btn-primary" data-i18n><span class="lang-de">Tisch reservieren</span><span class="lang-en">Book a table</span></a>
+    </div>
+  </article>
+
+</section>
+
+<footer class="menu-footer">
+  <p>© 2026 Long March Canteen GmbH · Berlin · Kreuzberg</p>
+  <p style="margin-top: 0.5rem;">
+    <a href="index.html" data-i18n><span class="lang-de">Startseite</span><span class="lang-en">Home</span></a> ·
+    <a href="index.html#kontakt" data-i18n><span class="lang-de">Kontakt</span><span class="lang-en">Contact</span></a> ·
+    <a href="impressum.html" data-i18n><span class="lang-de">Impressum</span><span class="lang-en">Imprint</span></a> ·
+    <a href="datenschutz.html" data-i18n><span class="lang-de">Datenschutz</span><span class="lang-en">Privacy</span></a>
+  </p>
+</footer>
+
+<script>
+  // ---------- Tab-Switching: Speisen + Getränke ----------
+  const menuTabs   = document.querySelectorAll('.menu-tab');
+  const menuPanels = document.querySelectorAll('.menu-panel');
+  const drinkTabs   = document.querySelectorAll('.drink-tab');
+  const drinkPanels = document.querySelectorAll('.drink-panel');
+  const bodyEl = document.body;
+
+  function activateMenuTab(id, opts) {
+    opts = opts || {};
+    let found = false;
+    menuTabs.forEach(t => {
+      const match = t.dataset.tab === id;
+      t.classList.toggle('active', match);
+      if (match) found = true;
+    });
+    if (!found) return false;
+    menuPanels.forEach(p => p.classList.toggle('active', p.dataset.panel === id));
+    // Getränke deaktivieren, da Speisen aktiv
+    drinkTabs.forEach(t => t.classList.remove('active'));
+    drinkPanels.forEach(p => p.classList.remove('active'));
+    bodyEl.classList.remove('drinks-active');
+    history.replaceState(null, '', location.pathname + location.search);
+    if (opts.scroll !== false) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    return true;
+  }
+
+  function activateDrinkTab(id, opts) {
+    opts = opts || {};
+    let found = false;
+    drinkTabs.forEach(t => {
+      const match = t.dataset.drink === id;
+      t.classList.toggle('active', match);
+      if (match) found = true;
+    });
+    if (!found) return false;
+    drinkPanels.forEach(p => p.classList.toggle('active', p.dataset.panel === id));
+    // Speisen-Tabs visuell entkoppeln, aber das aktive Speisepanel im Hintergrund behalten
+    menuTabs.forEach(t => t.classList.remove('active'));
+    bodyEl.classList.add('drinks-active');
+    history.replaceState(null, '', location.pathname + location.search);
+    if (opts.scroll !== false) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    return true;
+  }
+
+  menuTabs.forEach(t => {
+    t.addEventListener('click', () => activateMenuTab(t.dataset.tab));
+  });
+  drinkTabs.forEach(t => {
+    t.addEventListener('click', () => activateDrinkTab(t.dataset.drink));
+  });
+
+  // Initialer Hash steuert, welcher Tab geöffnet wird (auch Getränke-IDs).
+  // Hash wird beim Aktivieren entfernt und es wird NICHT animiert nach oben gescrollt –
+  // stattdessen sofort an den Seitenanfang (verhindert das Springen zu einer mittigen Section).
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash) {
+    if (!activateMenuTab(initialHash, { scroll: false })) activateDrinkTab(initialHash, { scroll: false });
+    window.scrollTo(0, 0);
+  }
+
+  // Sprach-Umschalter
+  const htmlRoot = document.getElementById('htmlRoot');
+  const btnDe = document.getElementById('langDe');
+  const btnEn = document.getElementById('langEn');
+
+  function setLang(lang) {
+    htmlRoot.setAttribute('lang', lang);
+    btnDe.classList.toggle('active', lang === 'de');
+    btnEn.classList.toggle('active', lang === 'en');
+    btnDe.setAttribute('aria-pressed', lang === 'de');
+    btnEn.setAttribute('aria-pressed', lang === 'en');
+    try { localStorage.setItem('lmc-lang', lang); } catch (e) {}
+  }
+
+  btnDe.addEventListener('click', () => setLang('de'));
+  btnEn.addEventListener('click', () => setLang('en'));
+
+  // Persistierte Sprache laden
+  try {
+    const saved = localStorage.getItem('lmc-lang');
+    if (saved === 'en' || saved === 'de') setLang(saved);
+  } catch (e) {}
+</script>
+
+</body>
+</html>

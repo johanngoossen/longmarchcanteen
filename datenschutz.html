@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="de" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<title>Datenschutzerklärung – Long March Canteen</title>
+<meta name="description" content="Datenschutzerklärung der Long March Canteen GmbH – DSGVO-konforme Information zur Verarbeitung personenbezogener Daten.">
+
+<link rel="stylesheet" href="https://use.typekit.net/kuz5egd.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --offwhite: #f5f5f5;
+    --accent: #ff8845;
+    --radius-lg: 1.94rem;
+    --radius-sm: 1.11rem;
+    --pad-x: 10vw;
+    --pad-y: 6.67rem;
+    --font-base: "urw-din", "Barlow", "Inter", system-ui, sans-serif;
+    --font-cond: "urw-din-condensed", "Barlow Condensed", "Inter", system-ui, sans-serif;
+    --font-semi: "urw-din-semi-condensed", "Barlow Condensed", "Inter", system-ui, sans-serif;
+
+    --bg: #000000;
+    --fg: #ffffff;
+    --fg-muted: rgba(255, 255, 255, 0.7);
+    --fg-faint: rgba(255, 255, 255, 0.55);
+    --border-soft: rgba(255, 255, 255, 0.15);
+    --border-faint: rgba(255, 255, 255, 0.08);
+    --nav-bg: rgba(0, 0, 0, 0.6);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --fg-muted: rgba(0, 0, 0, 0.68);
+      --fg-faint: rgba(0, 0, 0, 0.5);
+      --border-soft: rgba(0, 0, 0, 0.14);
+      --border-faint: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.75);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  @media (max-width: 543px) { html { font-size: 16px; } }
+  body {
+    font-family: var(--font-base);
+    font-weight: 500;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .25s ease, color .25s ease;
+  }
+  a { color: inherit; text-decoration: none; }
+  a.link { color: var(--accent); border-bottom: 1px solid currentColor; }
+  a.link:hover { opacity: 0.8; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  /* ---------- Top Bar ---------- */
+  header.menu-nav {
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: var(--nav-bg);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    height: 3.89rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--pad-x);
+    color: var(--fg);
+    gap: 1rem;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .menu-nav .back-link {
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: color .2s;
+    white-space: nowrap;
+  }
+  .menu-nav .back-link:hover { color: var(--accent); }
+  .menu-nav .back-link .arrow { transition: transform .2s; display: inline-block; }
+  .menu-nav .back-link:hover .arrow { transform: translateX(-3px); }
+  .menu-nav .brand {
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+  }
+  .menu-nav .right-cluster {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .menu-nav .lang-switch {
+    display: flex;
+    gap: 0.5rem;
+    font-family: var(--font-semi);
+    font-size: 0.85rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+  }
+  .lang-switch button { padding: 0; }
+  .lang-switch button.active { font-weight: 600; }
+  .lang-switch button:not(.active) { opacity: 0.4; }
+  .lang-switch button:hover { opacity: 0.8; }
+  .lang-switch .sep { opacity: 0.3; }
+
+  @media (max-width: 543px) {
+    .menu-nav .brand { display: none; }
+    .menu-nav { gap: 0.5rem; }
+    .menu-nav .back-link { font-size: 0.75rem; letter-spacing: 0.2rem; }
+  }
+
+  /* ---------- Hero ---------- */
+  .legal-hero {
+    padding: 5rem var(--pad-x) 1.5rem;
+    text-align: center;
+  }
+  .legal-hero h1 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 2.5rem;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  @media (max-width: 767px) { .legal-hero h1 { font-size: 1.8rem; } }
+  .legal-hero p.subtitle {
+    font-family: var(--font-semi);
+    font-size: 0.78rem;
+    letter-spacing: 0.22rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 0.6rem;
+  }
+
+  /* ---------- Content ---------- */
+  .legal-content {
+    padding: 3rem var(--pad-x) 6rem;
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+  .legal-content section { margin-bottom: 3rem; }
+  .legal-content section:last-of-type { margin-bottom: 0; }
+  .legal-content h2 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-soft);
+    opacity: 0.85;
+  }
+  .legal-content h3 {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.18rem;
+    text-transform: uppercase;
+    margin: 1.6rem 0 0.8rem;
+    opacity: 0.7;
+  }
+  .legal-content p {
+    font-family: var(--font-cond);
+    font-weight: 400;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    max-width: 44rem;
+  }
+  .legal-content ul {
+    list-style: none;
+    margin: 0.6rem 0 1.2rem;
+    padding: 0;
+  }
+  .legal-content ul li {
+    font-family: var(--font-cond);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .legal-content ul li::before {
+    content: "·";
+    color: var(--accent);
+    font-weight: 700;
+    position: absolute;
+    left: 0.3rem;
+    top: 0;
+  }
+  .legal-content p.note {
+    font-size: 0.92rem;
+    opacity: 0.65;
+    font-style: italic;
+  }
+  .legal-content strong { font-weight: 700; color: var(--fg); }
+
+  .legal-notice {
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 3rem;
+    background: rgba(255, 136, 69, 0.06);
+  }
+  .legal-notice h3 {
+    font-family: var(--font-semi);
+    font-size: 0.78rem;
+    letter-spacing: 0.22rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.6rem;
+    font-weight: 700;
+  }
+  .legal-notice p {
+    font-family: var(--font-cond);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    opacity: 0.85;
+    margin: 0;
+    max-width: none;
+  }
+
+  /* ---------- Footer ---------- */
+  .menu-footer {
+    padding: 3rem var(--pad-x);
+    background: var(--bg);
+    border-top: 1px solid var(--border-faint);
+    text-align: center;
+    font-family: var(--font-semi);
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .menu-footer a:hover { color: var(--accent); }
+
+  /* ---------- i18n helpers ---------- */
+  [data-i18n] .lang-en { display: none; }
+  html[lang="en"] [data-i18n] .lang-de { display: none; }
+  html[lang="en"] [data-i18n] .lang-en { display: inline; }
+</style>
+</head>
+<body>
+
+<header class="menu-nav">
+  <a href="index.html" class="back-link">
+    <span class="arrow">←</span>
+    <span data-i18n><span class="lang-de">Zurück</span><span class="lang-en">Back</span></span>
+  </a>
+  <div class="right-cluster">
+    <span class="brand">Long March Canteen</span>
+    <span class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="active" id="langDe" aria-pressed="true">DE</button>
+      <span class="sep">/</span>
+      <button type="button" id="langEn" aria-pressed="false">EN</button>
+    </span>
+  </div>
+</header>
+
+<section class="legal-hero">
+  <h1 data-i18n><span class="lang-de">Datenschutzerklärung</span><span class="lang-en">Privacy Policy</span></h1>
+  <p class="subtitle" data-i18n><span class="lang-de">Stand: Mai 2026</span><span class="lang-en">As of May 2026</span></p>
+</section>
+
+<main class="legal-content">
+
+  <div class="legal-notice">
+    <h3 data-i18n><span class="lang-de">Entwurf — vor Veröffentlichung prüfen</span><span class="lang-en">Draft — please review before publishing</span></h3>
+    <p data-i18n>
+      <span class="lang-de">Diese Datenschutzerklärung ist ein vorläufiger Entwurf, der die typischen Verarbeitungen einer Restaurant-Website abdeckt. Vor dem Live-Schalten sollte sie an die tatsächlich eingesetzten Dienste (z. B. Reservierungs-Tool, Newsletter, Analyse, Cookie-Banner) angepasst und idealerweise anwaltlich oder über einen anerkannten Generator (z. B. eRecht24) geprüft werden.</span>
+      <span class="lang-en">This privacy policy is a preliminary draft covering the typical processing operations of a restaurant website. Before going live, it should be adapted to the actual services in use (e.g. reservation tool, newsletter, analytics, cookie banner) and ideally reviewed by a lawyer or through a recognised generator such as eRecht24.</span>
+    </p>
+  </div>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">1. Verantwortlicher</span><span class="lang-en">1. Controller</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</span>
+      <span class="lang-en">The controller responsible for the processing of personal data on this website within the meaning of the General Data Protection Regulation (GDPR) is:</span>
+    </p>
+    <p>
+      <strong>Long March Canteen GmbH</strong><br>
+      Weinbergsweg 8, 10119 Berlin<br>
+      <span data-i18n><span class="lang-de">Vertretungsberechtigte Geschäftsführer</span><span class="lang-en">Managing directors</span></span>: Axel Burbacher, Guanfeng Guan<br>
+      <span data-i18n><span class="lang-de">E-Mail</span><span class="lang-en">Email</span></span>: <a href="mailto:info@longmarchcanteen.com" class="link">info@longmarchcanteen.com</a><br>
+      <span data-i18n><span class="lang-de">Telefon</span><span class="lang-en">Phone</span></span>: 030 / 311 767 89
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">2. Allgemeine Hinweise</span><span class="lang-en">2. General Information</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst und behandeln Ihre personenbezogenen Daten vertraulich, entsprechend der gesetzlichen Datenschutzvorschriften (insbesondere DSGVO und BDSG) sowie dieser Datenschutzerklärung. Bei der Nutzung dieser Website werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können.</span>
+      <span class="lang-en">We take the protection of your personal data very seriously and treat it confidentially in accordance with statutory data protection regulations (in particular the GDPR and BDSG) as well as this privacy policy. When you use this website, various personal data is collected. Personal data is data that can be used to identify you personally.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">3. Hosting und Server-Logfiles</span><span class="lang-en">3. Hosting and Server Log Files</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Diese Website wird bei einem externen Dienstleister gehostet (Hoster). Der Hoster verarbeitet Daten, die zum Zwecke der Vertragserfüllung erforderlich sind, sowie Server-Logfiles, die beim Aufruf der Website automatisch übermittelt werden. Hierzu zählen typischerweise:</span>
+      <span class="lang-en">This website is hosted by an external service provider. The provider processes data that is necessary for the performance of the contract, as well as server log files that are automatically transmitted when the website is accessed. These typically include:</span>
+    </p>
+    <ul>
+      <li data-i18n><span class="lang-de">IP-Adresse und Datum/Uhrzeit der Anfrage</span><span class="lang-en">IP address and date/time of the request</span></li>
+      <li data-i18n><span class="lang-de">Browsertyp und -version, verwendetes Betriebssystem</span><span class="lang-en">Browser type and version, operating system used</span></li>
+      <li data-i18n><span class="lang-de">Aufgerufene Seite und Referrer-URL</span><span class="lang-en">Page accessed and referrer URL</span></li>
+      <li data-i18n><span class="lang-de">Übertragene Datenmenge und Statuscode</span><span class="lang-en">Volume of data transferred and status code</span></li>
+    </ul>
+    <p data-i18n>
+      <span class="lang-de">Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer technisch fehlerfreien und sicheren Darstellung der Website). Die Daten werden gelöscht, sobald sie für den Zweck der Erhebung nicht mehr erforderlich sind, spätestens jedoch nach 30 Tagen, sofern keine sicherheitsrelevanten Vorfälle eine längere Speicherung erfordern.</span>
+      <span class="lang-en">The legal basis is Art. 6 (1) (f) GDPR (legitimate interest in a technically error-free and secure presentation of the website). The data is deleted as soon as it is no longer necessary for the purpose for which it was collected, at the latest after 30 days, unless security-related incidents require longer storage.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">4. Reservierungen</span><span class="lang-en">4. Reservations</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Für Online-Tisch­reservierungen setzen wir einen externen Reservierungs-Dienstleister ein. Bei einer Reservierung verarbeiten wir die von Ihnen angegebenen Daten (z. B. Name, E-Mail-Adresse, Telefonnummer, Reservierungsdatum, Personenanzahl, ggf. Anmerkungen). Die Daten werden ausschließlich zur Abwicklung der Reservierung verwendet.</span>
+      <span class="lang-en">For online table reservations we use an external reservation service provider. When making a reservation, we process the data you provide (e.g. name, email address, phone number, reservation date, number of guests and any notes). The data is used exclusively to handle the reservation.</span>
+    </p>
+    <p data-i18n>
+      <span class="lang-de">Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung / vorvertragliche Maßnahmen). Mit dem Dienstleister besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Die Daten werden gelöscht, sobald sie für die Durchführung der Reservierung nicht mehr erforderlich sind, spätestens nach Ablauf gesetzlicher Aufbewahrungsfristen.</span>
+      <span class="lang-en">The legal basis is Art. 6 (1) (b) GDPR (contract performance / pre-contractual measures). A data processing agreement under Art. 28 GDPR has been concluded with the service provider. The data is deleted as soon as it is no longer required for processing the reservation, at the latest after expiry of statutory retention periods.</span>
+    </p>
+    <p class="note" data-i18n>
+      <span class="lang-de">Hinweis: Der konkrete Name des Reservierungs-Dienstleisters (z. B. aleno.me) sowie dessen eigener Datenschutzhinweis sollten hier vor Veröffentlichung ergänzt werden.</span>
+      <span class="lang-en">Note: The specific name of the reservation service provider (e.g. aleno.me) and a link to their own privacy notice should be added here before publication.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">5. Kontaktaufnahme</span><span class="lang-en">5. Contacting Us</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Wenn Sie uns per E-Mail, Telefon oder über ein Kontaktformular kontaktieren, werden die von Ihnen mitgeteilten Daten zur Bearbeitung Ihrer Anfrage gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist, ansonsten Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der effektiven Bearbeitung von Anfragen). Die Daten werden gelöscht, sobald sie für den Zweck der Anfrage nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</span>
+      <span class="lang-en">If you contact us by email, phone or via a contact form, the data you provide will be stored to process your request. The legal basis is Art. 6 (1) (b) GDPR if your request relates to the performance of a contract or to pre-contractual measures, otherwise Art. 6 (1) (f) GDPR (legitimate interest in effectively handling enquiries). The data is deleted as soon as it is no longer required for the purpose of the request and no statutory retention obligations conflict with deletion.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">6. Cookies und lokale Speicherung</span><span class="lang-en">6. Cookies and Local Storage</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Diese Website verwendet derzeit nur technisch notwendige lokale Speicherung (Local Storage) zur Speicherung Ihrer bevorzugten Sprache (DE/EN). Es werden keine Tracking-Cookies, Werbe-Cookies oder Analyse-Cookies ohne Ihre Einwilligung gesetzt.</span>
+      <span class="lang-en">This website currently uses only technically necessary local storage to remember your preferred language (DE/EN). No tracking, advertising or analytics cookies are set without your consent.</span>
+    </p>
+    <p data-i18n>
+      <span class="lang-de">Rechtsgrundlage für technisch notwendige Speicherung ist Art. 6 Abs. 1 lit. f DSGVO bzw. § 25 Abs. 2 TDDDG. Sollten zukünftig weitere Cookies oder Analyse-Tools eingesetzt werden, holen wir hierzu eine vorherige Einwilligung über ein Cookie-Banner ein.</span>
+      <span class="lang-en">The legal basis for technically necessary storage is Art. 6 (1) (f) GDPR and § 25 (2) TDDDG. Should additional cookies or analytics tools be used in the future, we will obtain your prior consent via a cookie banner.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">7. Webfonts</span><span class="lang-en">7. Web Fonts</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Für eine einheitliche Darstellung von Schriftarten verwenden wir Webfonts, die über Adobe Typekit und Google Fonts bereitgestellt werden. Beim Aufruf der Seite lädt Ihr Browser die benötigten Schriften, wobei eine Verbindung zu den Servern der jeweiligen Anbieter aufgebaut wird. Hierdurch erlangen diese Kenntnis darüber, dass über Ihre IP-Adresse unsere Website aufgerufen wurde.</span>
+      <span class="lang-en">For a consistent display of fonts, we use web fonts provided by Adobe Typekit and Google Fonts. When you visit the page, your browser loads the required fonts, establishing a connection with the providers' servers. As a result, they become aware that our website has been accessed via your IP address.</span>
+    </p>
+    <p data-i18n>
+      <span class="lang-de">Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen Darstellung). Weitere Informationen entnehmen Sie den Datenschutzhinweisen der Anbieter:</span>
+      <span class="lang-en">The legal basis is Art. 6 (1) (f) GDPR (legitimate interest in a uniform presentation). Further information can be found in the providers' privacy notices:</span>
+    </p>
+    <ul>
+      <li><a class="link" href="https://www.adobe.com/privacy/policy.html" target="_blank" rel="noopener">Adobe Privacy Policy</a></li>
+      <li><a class="link" href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">8. Ihre Rechte als betroffene Person</span><span class="lang-en">8. Your Rights as a Data Subject</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Ihnen stehen nach der DSGVO folgende Rechte zu, die Sie jederzeit gegenüber dem Verantwortlichen geltend machen können:</span>
+      <span class="lang-en">Under the GDPR, you have the following rights, which you can assert at any time vis-à-vis the controller:</span>
+    </p>
+    <ul>
+      <li data-i18n><span class="lang-de"><strong>Auskunft</strong> (Art. 15 DSGVO) über die zu Ihrer Person gespeicherten Daten</span><span class="lang-en"><strong>Access</strong> (Art. 15 GDPR) to data stored about you</span></li>
+      <li data-i18n><span class="lang-de"><strong>Berichtigung</strong> unrichtiger Daten (Art. 16 DSGVO)</span><span class="lang-en"><strong>Rectification</strong> of inaccurate data (Art. 16 GDPR)</span></li>
+      <li data-i18n><span class="lang-de"><strong>Löschung</strong> Ihrer Daten (Art. 17 DSGVO)</span><span class="lang-en"><strong>Erasure</strong> of your data (Art. 17 GDPR)</span></li>
+      <li data-i18n><span class="lang-de"><strong>Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)</span><span class="lang-en"><strong>Restriction of processing</strong> (Art. 18 GDPR)</span></li>
+      <li data-i18n><span class="lang-de"><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO)</span><span class="lang-en"><strong>Data portability</strong> (Art. 20 GDPR)</span></li>
+      <li data-i18n><span class="lang-de"><strong>Widerspruch</strong> gegen Verarbeitungen aufgrund berechtigter Interessen (Art. 21 DSGVO)</span><span class="lang-en"><strong>Objection</strong> to processing based on legitimate interests (Art. 21 GDPR)</span></li>
+      <li data-i18n><span class="lang-de"><strong>Widerruf</strong> einer einmal erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</span><span class="lang-en"><strong>Withdrawal</strong> of consent with effect for the future (Art. 7 (3) GDPR)</span></li>
+    </ul>
+    <p data-i18n>
+      <span class="lang-de">Zur Ausübung Ihrer Rechte genügt eine formlose Nachricht an <a href="mailto:info@longmarchcanteen.com" class="link">info@longmarchcanteen.com</a>.</span>
+      <span class="lang-en">To exercise your rights, an informal message to <a href="mailto:info@longmarchcanteen.com" class="link">info@longmarchcanteen.com</a> is sufficient.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">9. Beschwerderecht bei der Aufsichtsbehörde</span><span class="lang-en">9. Right to Lodge a Complaint</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Unbeschadet anderweitiger Rechtsbehelfe steht Ihnen das Recht zu, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Auffassung sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO verstößt. Zuständig ist insbesondere die Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin.</span>
+      <span class="lang-en">Without prejudice to any other remedies, you have the right to lodge a complaint with a data protection supervisory authority if you believe that the processing of your personal data violates the GDPR. The competent authority is, in particular, the Berlin Commissioner for Data Protection and Freedom of Information, Alt-Moabit 59–61, 10555 Berlin.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">10. SSL-/TLS-Verschlüsselung</span><span class="lang-en">10. SSL/TLS Encryption</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und am Schloss-Symbol in Ihrer Browserzeile.</span>
+      <span class="lang-en">For security reasons and to protect the transmission of confidential content, this site uses SSL or TLS encryption. You can recognise an encrypted connection by the fact that the browser address line changes from "http://" to "https://" and by the lock icon in your browser line.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2 data-i18n><span class="lang-de">11. Aktualität dieser Datenschutzerklärung</span><span class="lang-en">11. Currency of this Privacy Policy</span></h2>
+    <p data-i18n>
+      <span class="lang-de">Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen umzusetzen, z. B. bei der Einführung neuer Dienste. Die jeweils aktuelle Fassung ist auf dieser Seite abrufbar.</span>
+      <span class="lang-en">We reserve the right to amend this privacy policy so that it always complies with the current legal requirements or to reflect changes to our services, e.g. when introducing new services. The current version is always available on this page.</span>
+    </p>
+  </section>
+
+</main>
+
+<footer class="menu-footer">
+  <p>© 2026 Long March Canteen GmbH · Berlin · Kreuzberg</p>
+  <p style="margin-top: 0.5rem;">
+    <a href="index.html" data-i18n><span class="lang-de">Startseite</span><span class="lang-en">Home</span></a> ·
+    <a href="menus.html" data-i18n><span class="lang-de">Menüs</span><span class="lang-en">Menus</span></a> ·
+    <a href="impressum.html" data-i18n><span class="lang-de">Impressum</span><span class="lang-en">Imprint</span></a>
+  </p>
+</footer>
+
+<script>
+  const htmlRoot = document.getElementById('htmlRoot');
+  const btnDe = document.getElementById('langDe');
+  const btnEn = document.getElementById('langEn');
+
+  function setLang(lang) {
+    htmlRoot.setAttribute('lang', lang);
+    btnDe.classList.toggle('active', lang === 'de');
+    btnEn.classList.toggle('active', lang === 'en');
+    btnDe.setAttribute('aria-pressed', lang === 'de');
+    btnEn.setAttribute('aria-pressed', lang === 'en');
+    try { localStorage.setItem('lmc-lang', lang); } catch (e) {}
+  }
+
+  btnDe.addEventListener('click', () => setLang('de'));
+  btnEn.addEventListener('click', () => setLang('en'));
+
+  try {
+    const saved = localStorage.getItem('lmc-lang');
+    if (saved === 'en' || saved === 'de') setLang(saved);
+  } catch (e) {}
+</script>
+
+</body>
+</html>
